@@ -4,18 +4,25 @@
  * and open the template in the editor.
  */
 package supergenericgametitlethegame;
-
+import acm.program.*;
 /**
  *
  * @author Paolo
  */
-public class SuperGenericGameTitleTheGame {
+public class SuperGenericGameTitleTheGame extends ConsoleProgram{
 
     /**
      * @param args the command line arguments
      */
+    public void run(){
+        println("dank memes");
+    }
+    
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
+        new SuperGenericGameTitleTheGame().start(args);
     }
     
 }

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package ADTs.Queue;
 
-package ADTs.ArrayList;
+import ADTs.ArrayList.*;
+
 /**
  *
  * @author Administrator
  */
-class ListEmptyException extends RuntimeException{
-    public ListEmptyException(String s){ 
+public class ListIndexOutOfBoundsException extends IndexOutOfBoundsException{
+      public ListIndexOutOfBoundsException(String s){
         super(s);
-    }//end constructor
-} 
+      }//end constructor
+} //end ListIndexOutofBoundsExceptio

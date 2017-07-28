@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 
-package ADTs.ArrayList;
+package ADTs.Queue;
+
+import ADTs.ArrayList.*;
+
 /**
  *
  * @author Administrator

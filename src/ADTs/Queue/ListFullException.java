@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 
-package ADTs.ArrayList;
+package ADTs.Queue;
+
+import ADTs.ArrayList.*;
+
 /**
  *
  * @author Administrator
  */
-class ListEmptyException extends RuntimeException{
-    public ListEmptyException(String s){ 
+public class ListFullException extends RuntimeException{
+    public ListFullException(String s){ 
         super(s);
     }//end constructor
-} 
+} //end ListException

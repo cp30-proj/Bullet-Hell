@@ -1,5 +1,5 @@
 
-package stackcalculatordp;
+package ADTs.Stack;
 
 /**
  *

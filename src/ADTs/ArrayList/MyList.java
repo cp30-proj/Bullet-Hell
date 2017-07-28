@@ -10,7 +10,7 @@
  * ------------------
  * This is the List ADT implementation
  */
-
+package ADTs.ArrayList;
 
 import acm.program.*;
 import acm.util.*;
