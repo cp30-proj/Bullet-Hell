@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package bulletHellObjectClasses;
+import acm.graphics.GImage;
+
 
 /**
  *
  * @author Paolo
  */
 public class Projectile {
+    GImage bulletimage = null;
     double xvelocity = 0;
     double yvelocity = 0;
     double direction = 0; //in degrees
@@ -41,6 +44,16 @@ public class Projectile {
     /**sets the direction in degrees*/
     public void setDirectionDegrees(double degree){
         direction = degree;
+    }
+    
+    /**set the bullets image with a GImage as a parameter*/
+    public void setProjectileImage(GImage img){
+        bulletimage = img;
+    }
+    
+    /**set image using the filename found in src/images */
+    public void setProjectileImage(String filename){
+        bulletimage = new GImage(filename);
     }
     
 }

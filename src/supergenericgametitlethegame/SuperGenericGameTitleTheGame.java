@@ -6,15 +6,23 @@
 package supergenericgametitlethegame;
 import acm.program.*;
 import bulletHellObjectClasses.*;
+import javax.swing.JLabel;
 /**
  *
  * @author Paolo
  */
-public class SuperGenericGameTitleTheGame extends ConsoleProgram{
+public class SuperGenericGameTitleTheGame extends ConsoleProgram implements SuperGenericGameTitleTheGameConstants{
     private Projectile samplebullet = new Projectile();
+    private GameCanvas canvas = new GameCanvas();
+    private JLabel Score = new JLabel("Placeholder");
     /**
      * @param args the command line arguments
      */
+    
+    public void init(){
+        add(Score, NORTH);
+        add(canvas);
+    }
     public void run(){
         //dank 
         //memes
