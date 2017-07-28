@@ -12,12 +12,13 @@ package bulletHellObjectClasses;
 public class Projectile {
     double xvelocity = 0;
     double yvelocity = 0;
-    double direction = 0; //in radians
+    double direction = 0; //in degrees
     
     
     public void setVelocity(double new_velocity){
-        xvelocity = new_velocity * Math.cos(direction);
-        yvelocity = new_velocity * Math.sin(direction);
+        double rads = (180/3.14)*direction;
+        xvelocity = new_velocity * Math.cos(rads);
+        yvelocity = new_velocity * Math.sin(rads);
     }
     
     public void setVelocity(double newx, double newy){
@@ -30,6 +31,16 @@ public class Projectile {
     }
     public void setYVelocity(double newy){
         yvelocity = newy;
+    }
+    public double getXVelocity(){
+        return xvelocity;
+    }
+    public double getYVelocity(){
+        return yvelocity;
+    }
+    /**sets the direction in degrees*/
+    public void setDirectionDegrees(double degree){
+        direction = degree;
     }
     
 }

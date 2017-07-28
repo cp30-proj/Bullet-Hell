@@ -5,19 +5,17 @@
  */
 package supergenericgametitlethegame;
 import acm.program.*;
+import bulletHellObjectClasses.*;
 /**
  *
  * @author Paolo
  */
 public class SuperGenericGameTitleTheGame extends ConsoleProgram{
-
+    private Projectile samplebullet = new Projectile();
     /**
      * @param args the command line arguments
      */
     public void run(){
-        println("dank memes");
-        println("very dank memes");
-        println("paolo's branch");
         
     }
     
