@@ -18,10 +18,7 @@ public class SuperGenericGameTitleTheGame extends ConsoleProgram{
         println("dank memes");
         println("very dank memes");
         println("paolo's branch");
-        println("mergeing to master branch");
-        println("unique master");
-        println("danker memes");
-        //test automatic sync
+        
     }
     
     
