@@ -11,7 +11,7 @@ import javax.swing.JLabel;
  *
  * @author Paolo
  */
-public class SuperGenericGameTitleTheGame extends ConsoleProgram implements SuperGenericGameTitleTheGameConstants{
+public class SuperGenericGameTitleTheGame extends Program implements SuperGenericGameTitleTheGameConstants{
     private Projectile samplebullet = new Projectile();
     private GameCanvas canvas = new GameCanvas();
     private JLabel Score = new JLabel("Placeholder");
@@ -22,10 +22,10 @@ public class SuperGenericGameTitleTheGame extends ConsoleProgram implements Supe
     public void init(){
         add(Score, NORTH);
         add(canvas);
+        
     }
     public void run(){
-        //dank 
-        //memes
+        canvas.placeholder();
     }
     
     

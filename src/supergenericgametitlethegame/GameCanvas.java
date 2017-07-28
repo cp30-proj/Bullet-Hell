@@ -11,6 +11,11 @@ import acm.program.GraphicsProgram;
  *
  * @author Paolo
  */
-public class GameCanvas extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants{
+public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameConstants{
+    private GLabel placeholder = new GLabel("Placeholder");
     
+    public void placeholder(){
+        placeholder.setLocation(getWidth()/2, getHeight()/2);
+        add(placeholder);
+    }
 }

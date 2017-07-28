@@ -13,5 +13,5 @@ public interface SuperGenericGameTitleTheGameConstants {
     public static final int APPLICATION_WIDTH = 500;
 
 	/** The height of the application window */
-    public static final int APPLICATION_HEIGHT = 800;
+    public static final int APPLICATION_HEIGHT = 700;
 }
