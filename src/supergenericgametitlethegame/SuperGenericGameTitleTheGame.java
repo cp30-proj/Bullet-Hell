@@ -40,9 +40,15 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     public void demobullet(){
         Projectile bullet = new Projectile();
         bullet.setLocation(50, 50);
-        bullet.setDirectionDegrees(300);
+        bullet.setDirectionDegrees(90);
         bullet.setVelocity(100);
         bullet.setProjectileImage("bluebullet.png");
+        tracker.addProjectile(bullet);
+        bullet = new Projectile();
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(270);
+        bullet.setVelocity(75);
+        bullet.setProjectileImage("redbullet.png");
         tracker.addProjectile(bullet);
     }
     

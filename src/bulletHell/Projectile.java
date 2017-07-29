@@ -21,9 +21,9 @@ public class Projectile {
     
     
     public void setVelocity(double new_velocity){
-        double rads = (180/3.14)*direction;
+        double rads = (3.14/180)*direction;
         xvelocity = new_velocity * Math.cos(rads);
-        yvelocity = new_velocity * Math.sin(rads);
+        yvelocity = new_velocity * Math.sin(rads)*(-1);
     }
     
     public void setVelocity(double newx, double newy){

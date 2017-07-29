@@ -6,7 +6,6 @@
 package supergenericgametitlethegame;
 import bulletHell.*;
 import java.util.ArrayList;
-import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
