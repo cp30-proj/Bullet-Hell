@@ -33,7 +33,6 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
             tracker.updateObjects();
             canvas.drawFrame(tracker.getBullets());
             pause(FRAME_PAUSE);
-            println(FRAME_PAUSE+", " +(1000/FPS)+ ", "+FPS);
         }
     }
     
