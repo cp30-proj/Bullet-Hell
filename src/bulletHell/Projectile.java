@@ -48,15 +48,6 @@ public class Projectile {
         direction = degree;
     }
     
-    /**set the bullets image with a GImage as a parameter*/
-    public void setProjectileImage(GImage img){
-        bulletimage = img;
-    }
-    
-    public void setLocation(double x, double y){
-        xlocation = x;
-        ylocation = y;
-    }
     
     public double getX(){
         return xlocation;
@@ -69,6 +60,25 @@ public class Projectile {
     /**set image using the filename found in src/images */
     public void setProjectileImage(String filename){
         bulletimage = new GImage(filename);
+    }
+    
+    public void setProjectileImage(GImage img){
+        bulletimage = img;
+    }
+    
+    public void setProjectileImage(String filename, double sizex, double sizey){
+        bulletimage = new GImage(filename);
+        bulletimage.setSize(sizex, sizey);
+    }
+    
+    public void setProjectileImage(GImage img, double sizex, double sizey){
+        bulletimage = img;
+        bulletimage.setSize(sizex, sizey);
+    }
+    
+    public void setLocation(double x, double y){
+        xlocation = x;
+        ylocation = y;
     }
     
     public GImage getProjectileImage(){

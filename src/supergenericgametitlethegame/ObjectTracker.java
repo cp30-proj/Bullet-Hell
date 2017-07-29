@@ -8,13 +8,15 @@ import bulletHell.*;
 import java.util.ArrayList;
 import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
 /**
  *
  * @author Paolo
  */
 public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
-    private ArrayList<Projectile> bullets = new ArrayList<>();
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private final ArrayList<Projectile> bullets = new ArrayList<>();
+    private final LinkedList<Enemy> enemies = new LinkedList<>();
     
     
     public void addProjectile(Projectile newbullet){
@@ -42,13 +44,19 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         //add enemy update location
     }
     
-    public Iterator getBullets(){
-        Iterator printBullets = bullets.iterator();
-        return printBullets;
+    public Stack getBullets(){
+        Stack<Projectile> printbullets = new Stack<>();
+        for(int i=0; i<bullets.size(); i++){
+            printbullets.add(bullets.get(i));
+        }
+        return printbullets;
     }
-    public Iterator getEnemies(){
-        Iterator printEnemies = enemies.iterator();
-        return printEnemies;
+    public Stack getEnemies(){
+        Stack<Enemy> printenemies = new Stack<>();
+        for(int i=0; i<enemies.size(); i++){
+            printenemies.add(enemies.get(i));
+        }
+        return printenemies;
     }
     
 }

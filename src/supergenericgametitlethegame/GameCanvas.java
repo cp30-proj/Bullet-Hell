@@ -9,6 +9,7 @@ import acm.program.GraphicsProgram;
 import java.util.Queue;
 import bulletHell.*;
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  *
@@ -22,9 +23,9 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
         add(placeholder);
     }
     
-    public void drawFrame(Iterator bullets){
-        while(bullets.hasNext()){
-            Projectile bullet = (Projectile)bullets.next();
+    public void drawFrame(Stack bullets){
+        while(!bullets.empty()){
+            Projectile bullet = (Projectile)bullets.pop();
             add(bullet.getProjectileImage(), bullet.getX(), bullet.getY());
         }
     }
