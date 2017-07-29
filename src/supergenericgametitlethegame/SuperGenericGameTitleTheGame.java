@@ -6,7 +6,6 @@
 package supergenericgametitlethegame;
 import bulletHell.*;
 import acm.program.*;
-import java.util.Queue;
 import javax.swing.JLabel;
 /**
  *
@@ -17,7 +16,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private GameCanvas canvas = new GameCanvas();
     private JLabel Score = new JLabel("Placeholder");
     private ObjectTracker tracker = new ObjectTracker();
-    private Queue meme;
+    
     /**
      * @param args the command line arguments
      */
@@ -34,21 +33,22 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
             tracker.updateObjects();
             canvas.drawFrame(tracker.getBullets());
             pause(FRAME_PAUSE);
+            println(FRAME_PAUSE+", " +(1000/FPS)+ ", "+FPS);
         }
     }
     
     public void demobullet(){
         Projectile bullet = new Projectile();
         bullet.setLocation(50, 50);
-        bullet.setDirectionDegrees(90);
-        bullet.setVelocity(100);
-        bullet.setProjectileImage("bluebullet.png");
+        bullet.setDirectionDegrees(290);
+        bullet.setVelocity(200);
+        bullet.setImage("bluebullet.png");
         tracker.addProjectile(bullet);
         bullet = new Projectile();
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(270);
         bullet.setVelocity(75);
-        bullet.setProjectileImage("redbullet.png");
+        bullet.setImage("redbullet.png");
         tracker.addProjectile(bullet);
     }
     
