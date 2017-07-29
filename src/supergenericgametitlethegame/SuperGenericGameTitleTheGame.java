@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package supergenericgametitlethegame;
+import bulletHell.Projectile;
 import acm.program.*;
-import bulletHellObjectClasses.*;
 import javax.swing.JLabel;
 /**
  *

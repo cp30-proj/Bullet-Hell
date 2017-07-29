@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bulletHellObjectClasses;
+package bulletHell;
 import acm.graphics.GImage;
 
 
@@ -14,7 +14,9 @@ import acm.graphics.GImage;
 public class Projectile {
     GImage bulletimage = null;
     double xvelocity = 0;
+    double xlocation = 0;
     double yvelocity = 0;
+    double ylocation = 0;
     double direction = 0; //in degrees
     
     
