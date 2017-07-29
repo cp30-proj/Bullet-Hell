@@ -53,9 +53,31 @@ public class Projectile {
         bulletimage = img;
     }
     
+    public void setLocation(double x, double y){
+        xlocation = x;
+        ylocation = y;
+    }
+    
+    public double getX(){
+        return xlocation;
+    }
+    
+    public double getY(){
+        return ylocation;
+    }
+    
     /**set image using the filename found in src/images */
     public void setProjectileImage(String filename){
         bulletimage = new GImage(filename);
+    }
+    
+    public GImage getProjectileImage(){
+        return bulletimage;
+    }
+    
+    public void updateLocation(double time){
+        xlocation+=(xvelocity*time/1000);
+        ylocation+=(yvelocity*time/1000);
     }
     
 }

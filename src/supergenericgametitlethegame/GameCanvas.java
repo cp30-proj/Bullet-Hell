@@ -6,6 +6,9 @@
 package supergenericgametitlethegame;
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
+import java.util.Queue;
+import bulletHell.*;
+import java.util.Iterator;
 
 /**
  *
@@ -18,4 +21,13 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
         placeholder.setLocation(getWidth()/2, getHeight()/2);
         add(placeholder);
     }
+    
+    public void drawFrame(Iterator bullets){
+        while(bullets.hasNext()){
+            Projectile bullet = (Projectile)bullets.next();
+            add(bullet.getProjectileImage(), bullet.getX(), bullet.getY());
+        }
+    }
+    
+    
 }
