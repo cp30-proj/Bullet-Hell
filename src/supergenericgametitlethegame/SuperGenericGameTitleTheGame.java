@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 package supergenericgametitlethegame;
-import bulletHell.Projectile;
+import bulletHell.*;
 import acm.program.*;
+import java.util.Queue;
 import javax.swing.JLabel;
 /**
  *
@@ -15,6 +16,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private Projectile samplebullet = new Projectile();
     private GameCanvas canvas = new GameCanvas();
     private JLabel Score = new JLabel("Placeholder");
+    private Queue meme;
     /**
      * @param args the command line arguments
      */
