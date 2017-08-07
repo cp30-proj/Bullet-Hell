@@ -5,7 +5,9 @@
  */
 package bulletHell;
 import acm.graphics.GImage;
-import bulletHell.Projectile;
+import bulletHell.Bullet;
+import java.util.ArrayList;
+import java.util.Iterator;
 /**
  *
  * @author Paolo
@@ -20,28 +22,93 @@ public class Enemy{
     private double direction = 0; //in degrees
     private double accelerate = 0;
     private double accel_direction = 0;
-    private double sizex = 0;
-    private double sizey = 0;
+    private double xsize = 0;
+    private double ysize = 0;
+    private double xboundary = 0;
+    private double yboundary = 0;
+    
+    private int cycle = 3000;
+    private int cyclebuffer = 0;
+    private int currenttime = 0;
+    private int defaultspawntime = 3000;
+    
+    private ArrayList<Bullet> bullettemplates = new ArrayList<>();
+    private ArrayList<Integer> spawntimes = new ArrayList<>();
+    private ArrayList<Double> spawnpoints = new ArrayList<>(); //curcular points around the enemy where bullets will spawn
+    private ArrayList<Double> spawndistance = new ArrayList<>();
     
     private int n_behaviors = 5;
     private boolean[] behavior = new boolean[5];
     
-    public void Enemy(){
+    public Enemy(int xbound, int ybound){
+        xboundary = xbound;
+        yboundary = ybound;
         for(int i = 0; i<n_behaviors; i++){
             behavior[i] = false;
         }
     }
     
-    public void updateLocation(double time){
-        behaviorAction();
-        xlocation+=(xvelocity*time/1000);
-        ylocation+=(yvelocity*time/1000);
+    public void addBulletSpawn(GImage img, double newspawnpnt, double centerdistance, double speed, int spawntime){
+        Bullet newbullet = new Bullet();
+        newbullet.setImage(img);
+        newbullet.setDirectionDegrees(newspawnpnt);
+        newbullet.setVelocity(speed);
+        bullettemplates.add(newbullet);
+        spawntimes.add(spawntime);
+        spawnpoints.add(newspawnpnt);
+        spawndistance.add(centerdistance);
+        updateCycleTime();
+    }
+    public void addBulletSpawn(Bullet newbullet, double newspawnpnt, double centerdistance, int spawntime){
+        bullettemplates.add(newbullet);
+        spawntimes.add(spawntime);
+        spawnpoints.add(newspawnpnt);
+        spawndistance.add(centerdistance);
+        updateCycleTime();
+    }
+    
+    public ArrayList getBullets(int time){
+        ArrayList<Bullet> newbullets = new ArrayList<>();
+        currenttime+=time;
+        Bullet bullet = null;
+        for(int i=1; i<spawntimes.size(); i++){
+            if(spawntimes.get(i)<currenttime){
+                bullet = new Bullet();
+                bullet.setImage(bullettemplates.get(i).getImage());
+                bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
+                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getXCenter()-(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
+                newbullets.add(bullet);
+            }
+        }
+        if(currenttime>cycle)
+            currenttime=0;
+        return newbullets;
     }
     
     public void behaviorAction(){
         if(behavior[0]){ 
             
         }
+    }
+    
+    private void setcyclebuffer(int buffer){
+        cyclebuffer = buffer;
+    }
+    
+    private void updateCycleTime(){
+        cycle=0;
+        for(int i=0; i<spawntimes.size(); i++){
+            if(spawntimes.get(i)>cycle){
+                cycle = spawntimes.get(i);
+            }
+        }
+        cycle += cyclebuffer;
+    }
+    
+    public void updateLocation(double time){
+        behaviorAction();
+        xlocation+=(xvelocity*time/1000);
+        ylocation+=(yvelocity*time/1000);
     }
     
     public void setBehavior(int index, boolean active){
@@ -87,42 +154,44 @@ public class Enemy{
      /**set image using the filename found in src/images */
     public void setImage(String filename){
         image = new GImage(filename);
-        sizex = image.getWidth();
-        sizey = image.getWidth();
+        xsize = image.getWidth();
+        ysize = image.getWidth();
     }
     
     public void setImage(GImage img){
         image = img;
-        sizex = image.getWidth();
-        sizey = image.getWidth();
+        xsize = image.getWidth();
+        ysize = image.getWidth();
     }
     
-    public void setImage(String filename, double sizex, double sizey){
+    public void setImage(String filename, double xsize, double ysize){
         image = new GImage(filename);
-        image.setSize(sizex, sizey);
-        this.sizex = sizex;
-        this.sizey = sizey;
+        image.setSize(xsize, ysize);
+        this.xsize = xsize;
+        this.ysize = ysize;
     }
     
-    public void setImage(GImage img, double sizex, double sizey){
+    public void setImage(GImage img, double xsize, double ysize){
         image = img;
-        image.setSize(sizex, sizey);
-        this.sizex = sizex;
-        this.sizey = sizey;
+        image.setSize(xsize, ysize);
+        this.xsize = xsize;
+        this.ysize = ysize;
     }
     
-    public void setImageSize(double sizex, double sizey){
-        image.setSize(sizex, sizey);
-        this.sizex = sizex;
-        this.sizey = sizey;
+    public void setImageSize(double xsize, double ysize){
+        if(image!=null){
+            image.setSize(xsize, ysize);
+            this.xsize = xsize;
+            this.ysize = ysize;
+        }
     }
     
     public double getXsize(){
-        return sizex;
+        return xsize;
     }
     
     public double getYsize(){
-        return sizey;
+        return ysize;
     }
     
     public GImage getImage(){
@@ -134,6 +203,11 @@ public class Enemy{
         ylocation = y;
     }
     
+    public double getXCenter(){
+        return xlocation+(xsize/2);
+    }
     
-    
+    public double getYCenter(){
+        return ylocation-(ysize/2);
+    }
 }

@@ -23,10 +23,14 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
         add(placeholder);
     }
     
-    public void drawFrame(Stack bullets){
+    public void drawFrame(Stack bullets, Stack enemies){
         while(!bullets.empty()){
-            Projectile bullet = (Projectile)bullets.pop();
+            Bullet bullet = (Bullet)bullets.pop();
             add(bullet.getImage(), bullet.getX(), bullet.getY());
+        }
+        while(!enemies.empty()){
+            Enemy enemy = (Enemy)enemies.pop();
+            add(enemy.getImage(), enemy.getX(), enemy.getY());
         }
     }
     

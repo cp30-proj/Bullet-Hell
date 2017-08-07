@@ -11,7 +11,7 @@ import acm.graphics.GImage;
  *
  * @author Paolo
  */
-public class Projectile {
+public class Bullet {
     GImage image = null;
     double xvelocity = 0;
     double xlocation = 0;
@@ -49,6 +49,7 @@ public class Projectile {
     /**sets the direction in degrees*/
     public void setDirectionDegrees(double degree){
         direction = degree;
+        
     }
     
     public double getX(){

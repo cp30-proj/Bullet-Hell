@@ -14,16 +14,17 @@ import java.util.Stack;
  * @author Paolo
  */
 public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
-    private final ArrayList<Projectile> bullets = new ArrayList<>();
+    private final ArrayList<Bullet> bullets = new ArrayList<>();
     private final LinkedList<Enemy> enemies = new LinkedList<>();
+    private double xboundary = 0;
+    private double yboundary = 0;
     
-    
-    public void addProjectile(Projectile newbullet){
+    public void addProjectile(Bullet newbullet){
         bullets.add(newbullet);
     }
     public void addProjectile(Iterator newbullets){
         while(newbullets.hasNext()){
-            bullets.add((Projectile)newbullets.next());
+            bullets.add((Bullet)newbullets.next());
         }
     }
     
@@ -37,14 +38,22 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     }
     
     public void updateObjects(){
+        removeOffScreenObjects();
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
         }
-        //add enemy update location
+        for(int i=0; i<enemies.size(); i++){
+            ArrayList addbullets = enemies.get(i).getBullets(FRAME_PAUSE);
+            for(int j=0; j<addbullets.size(); j++){
+                bullets.add((Bullet)addbullets.get(j));
+            }
+            enemies.get(i).updateLocation(FRAME_PAUSE);
+        }
+        
     }
     
     public Stack getBullets(){
-        Stack<Projectile> printbullets = new Stack<>();
+        Stack<Bullet> printbullets = new Stack<>();
         for(int i=0; i<bullets.size(); i++){
             printbullets.add(bullets.get(i));
         }
@@ -58,4 +67,27 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         return printenemies;
     }
     
+    private void removeOffScreenObjects(){
+        double x = 0;
+        double y = 0;
+        for(int i=bullets.size()-1; i>=0; i--){
+            x = bullets.get(i).getX();
+            y = bullets.get(i).getY();
+            if((x>(xboundary + OFFSCREEN_BUFFER)) || (x<(0-bullets.get(i).getXsize()-OFFSCREEN_BUFFER)) || (y>(yboundary + OFFSCREEN_BUFFER)) || (y<(0-bullets.get(i).getYsize()-OFFSCREEN_BUFFER))){
+                bullets.remove(i);
+            }
+        }
+        for(int i=enemies.size()-1; i>=0; i--){
+            x = enemies.get(i).getX();
+            y = enemies.get(i).getY();
+            if((x>(xboundary + OFFSCREEN_BUFFER)) || (x<(0-enemies.get(i).getXsize()-OFFSCREEN_BUFFER)) || (y>(yboundary + OFFSCREEN_BUFFER)) || (y<(0-enemies.get(i).getYsize()-OFFSCREEN_BUFFER))){
+                enemies.remove(i);
+            }
+        }
+    }
+    
+    public void setBounds(double xbound, double ybound){
+        xboundary = xbound;
+        yboundary = ybound;
+    }
 }
