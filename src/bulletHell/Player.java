@@ -20,17 +20,41 @@ public class Player {
     double startX = 0;
     double startY = 0;
     GImage pImage = null;
-
-    public void drawPlayer() {
-        pImage = new GImage(insert filename of image ?);
-        add(pImage, insert starting Xcoordinate, insert starting Xcoordinate);
-    }
+    double insertstartingXcoordinate;
+    double insertstartingYcoordinate;
     
     public void drawPlayer() {
         pImage = new GImage(insert filename of image ?);
         add(pImage, insert starting Xcoordinate, insert starting Xcoordinate);
     }
-    
+    double x=100;
+    double y= 100;
+        public void keyPressed(KeyEvent ke) {
+            switch (ke.getKeyCode()) {
+              
+                case KeyEvent.VK_W:
+                    pImage.setLocation(0.5*(insertstartingXcoordinate)-pImage.getWidth()+x,insertstartingYcoordinate-pImage.getHeight()+y);
+                    y--;
+                    break;
+                case KeyEvent.VK_A:
+                      pImage.setLocation(0.5*(insertstartingXcoordinate)-pImage.getWidth()+x,insertstartingYcoordinate-pImage.getHeight()+y);
+                      x--;
+                    break;
+                case KeyEvent.VK_S:
+                    pImage.setLocation(0.5*(insertstartingXcoordinate)-pImage.getWidth()+x,insertstartingYcoordinate-pImage.getHeight()+y);
+                    y++;
+                    break;
+                case KeyEvent.VK_D:
+                    pImage.setLocation(0.5*(insertstartingXcoordinate)-pImage.getWidth()+x,insertstartingYcoordinate-pImage.getHeight()+y);
+                    x++;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    //return projectiles to fire at opponent
+                    break;
+                default:
+                    break;
+            }
+        }
     public void mouseMoved(MouseEvent me){
         pImage.setLocation(me.getX()-0.5*pImage.getWidth(),me.getY()-0.5*pImage.getHeight());
     }
@@ -39,6 +63,9 @@ public class Player {
           if (isPlayerHit())
               pHealth--;
     }
+    public void attackPlayer(){
+
+            
     public boolean isPlayerHit(){
             if( getElementAt(pImage.getX(),pImage.getY())!=null){
                 return true;
