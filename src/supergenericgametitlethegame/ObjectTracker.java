@@ -16,6 +16,7 @@ import java.util.Stack;
 public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     private final ArrayList<Projectile> bullets = new ArrayList<>();
     private final LinkedList<Enemy> enemies = new LinkedList<>();
+    private Level Level = new Level();
     
     
     public void addProjectile(Projectile newbullet){
@@ -39,6 +40,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     public void updateObjects(){
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
+            
         }
         //add enemy update location
     }
