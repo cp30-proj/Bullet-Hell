@@ -5,10 +5,21 @@
  */
 package bulletHell;
 
+import acm.graphics.*;
+import java.awt.*;
+import java.util.*;
+
 /**
  *
  * @author Paolo
  */
 public class Level {
+    public GImage bg;
+    public void setbglevel(String filename){
+            bg = new GImage(filename);     
+    }
+    public void setmusiclevel(int level){
+        
+    }
     
 }
