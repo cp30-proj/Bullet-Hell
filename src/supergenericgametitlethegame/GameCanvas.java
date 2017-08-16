@@ -17,10 +17,24 @@ import java.util.Stack;
  */
 public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameConstants{
     private GLabel placeholder = new GLabel("Placeholder");
+    private Level Level = new Level();
+    private Player Player = new Player();
     
     public void placeholder(){
         placeholder.setLocation(getWidth()/2, getHeight()/2);
         add(placeholder);
+    }
+    public void addbg(int level){
+        if(level==1){
+           Level.setbglevel("testbg.png");
+        }
+        add(Level.bg,0,0);
+    }
+    public void addplayer(){
+        add(Player.pImage);
+    }
+    public void setbglocation(int x){
+        
     }
     
     public void drawFrame(Stack bullets){
