@@ -17,7 +17,10 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private GameCanvas canvas = new GameCanvas();
     private JLabel Score = new JLabel("Placeholder");
     private ObjectTracker tracker = new ObjectTracker();
+    private Level Level = new Level();
+    private Player Player = new Player();
     private Queue meme;
+    int x = 0;
     /**
      * @param args the command line arguments
      */
@@ -28,12 +31,15 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         
     }
     public void run(){
+        canvas.addbg(1);
         demobullet();
+        canvas.addplayer();
         //canvas.placeholder();
         while(true){
             tracker.updateObjects();
             canvas.drawFrame(tracker.getBullets());
             pause(FRAME_PAUSE);
+            
         }
     }
     
