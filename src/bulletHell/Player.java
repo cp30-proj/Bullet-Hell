@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package breakout;
+package bulletHell;
 
 import acm.graphics.*;
 import java.awt.event.*;
@@ -19,14 +19,14 @@ public class Player {
     double yCoord = 0;
     double startX = 0;
     double startY = 0;
-    GImage pImage = null;
-    double insertstartingXcoordinate;
-    double insertstartingYcoordinate;
+   
+    double insertstartingXcoordinate=0;
+    double insertstartingYcoordinate=0;
     
-    public void drawPlayer() {
-        pImage = new GImage(insert filename of image ?);
-        add(pImage, insert starting Xcoordinate, insert starting Xcoordinate);
-    }
+ 
+    public GImage pImage = new GImage("fuck.png");
+        
+  
     double x=100;
     double y= 100;
         public void keyPressed(KeyEvent ke) {
@@ -60,25 +60,27 @@ public class Player {
     }
     
     public void damagePlayer(){
-          if (isPlayerHit())
+          //if (isPlayerHit())
               pHealth--;
     }
     public void attackPlayer(){
+        
+    }
 
             
-    public boolean isPlayerHit(){
-            if( getElementAt(pImage.getX(),pImage.getY())!=null){
-                return true;
-            }
-            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY())!=null){
-                return true;
-            }
-            else if ( getElementAt(pImage.getX(),pImage.getY()+pImage.getHeight())!=null){
-                return true;
-            }
-            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY()+pImage.getHeight())!=null){
-                return true;
-            }
-            return false;
-    }
+   // public boolean isPlayerHit(){
+            //if( getElementAt(pImage.getX(),pImage.getY())!=null){
+                //return true;
+            //}
+            //else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY())!=null){
+                //return true;
+            //}
+            //else if ( getElementAt(pImage.getX(),pImage.getY()+pImage.getHeight())!=null){
+                //return true;
+            //}
+            //else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY()+pImage.getHeight())!=null){
+                //return true;
+           // }
+            //return false;
+   // }
 }
