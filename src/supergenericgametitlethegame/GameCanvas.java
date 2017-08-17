@@ -38,7 +38,7 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
     public void setbglocation(int x){
         
     }
-    public boolean isPlayerHit(){
+    /*public boolean isPlayerHit(){
             if( getElementAt(pImage.getX(),pImage.getY())!=null){
                 return true;
             }
@@ -52,7 +52,7 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
                 return true;
             }
             return false;
-   }
+   }*/
     
     public void drawFrame(Stack bullets, Stack enemies){
         removeAll();
