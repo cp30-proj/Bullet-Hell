@@ -7,6 +7,9 @@ package supergenericgametitlethegame;
 import bulletHell.*;
 import acm.program.*;
 import javax.swing.JLabel;
+import java.io.*;
+import java.util.logging.Logger;
+import sun.audio.*;
 /**
  *
  * @author Paolo
@@ -19,6 +22,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private Level Level = new Level();
     private Player Player = new Player();
     int x = 0;
+    InputStream music;
     /**
      * @param args the command line arguments
      */
@@ -28,6 +32,11 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         add(Score, NORTH);
         add(canvas);
         canvas.addbg(1);
+        try {
+            music();
+        } catch (IOException ex) {
+            Logger.getLogger(SuperGenericGameTitleTheGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         
     }
     public void run(){
@@ -46,7 +55,11 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
             
         }
     }
-    
+    public void music() throws FileNotFoundException, IOException{
+        music=new FileInputStream(new File("src\\audio\\unowen.wav"));
+        AudioStream audios=new AudioStream(music);
+        AudioPlayer.player.start(audios); 
+    }
     public void demo(){
         
         Bullet bullet2 = new Bullet();
