@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package breakout;
+package bullethell;
 
 import acm.graphics.*;
+import acm.graphics.GImage;
 import java.awt.event.*;
 
 /**
@@ -24,8 +25,8 @@ public class Player {
     double insertstartingYcoordinate;
     
     public void drawPlayer() {
-        pImage = new GImage(insert filename of image ?);
-        add(pImage, insert starting Xcoordinate, insert starting Xcoordinate);
+        //pImage = new GImage(insert filename of image ?);
+        //add(pImage, insert starting Xcoordinate, insert starting Xcoordinate);
     }
     double x=100;
     double y= 100;
