@@ -35,6 +35,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         //demo();
         spawnclockwisespinner(50,50,0,0);
         wiper(350,50,0,0);
+        laser(350,50,-50,0,270);
         
         //canvas.placeholder();
         while(true){
@@ -138,6 +139,26 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         bullet.setImage("redbullet.png");
         enemy.addBulletSpawn(bullet, 90, 10, 1800+(i*100));
         }
+        //tracker.addProjectile(bullet);
+        
+        enemy.setLocation(xloc,yloc);
+        enemy.setVelocity(xvel, yvel);
+        enemy.setImage("centrifuge.png");
+        enemy.setImageSize(30, 30);
+        tracker.addEnemy(enemy);
+    }
+    public void laser(int xloc, int yloc, int xvel, int yvel,int angle){
+        
+        Bullet bullet = new Bullet();
+        Enemy enemy = new Enemy(getWidth(), getHeight()); 
+        
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(angle);
+        bullet.setVelocity(400);
+        bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, 100);
+       
         //tracker.addProjectile(bullet);
         
         enemy.setLocation(xloc,yloc);
