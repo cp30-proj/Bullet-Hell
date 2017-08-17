@@ -11,5 +11,5 @@ import bulletHell.*;
  * @author Paolo
  */
 public class LevelTemplate {
-   private Projectile Bullet;
+   private Bullet Bullet;
 }
