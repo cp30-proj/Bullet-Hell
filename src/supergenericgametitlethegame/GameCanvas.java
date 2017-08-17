@@ -39,16 +39,16 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
         
     }
     public boolean isPlayerHit(){
-            if( getElementAt(pImage.getX(),pImage.getY())!=null){
+            if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null){
                 return true;
             }
-            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY())!=null){
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=null){
                 return true;
             }
-            else if ( getElementAt(pImage.getX(),pImage.getY()+pImage.getHeight())!=null){
+            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
                 return true;
             }
-            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY()+pImage.getHeight())!=null){
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
                 return true;
             }
             return false;

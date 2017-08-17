@@ -32,19 +32,22 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
-        demo();
+        //demo();
+        spawnspinner(50,50,0,0);
+        spawnspinner(350,50,0,0);
         //canvas.placeholder();
         while(true){
             tracker.updateObjects();
             canvas.drawFrame(tracker.getBullets(), tracker.getEnemies());
             pause(FRAME_PAUSE);
             
+            
         }
     }
     
     public void demo(){
         
-        
+        Bullet bullet2 = new Bullet();
         Bullet bullet = new Bullet();
         bullet.setLocation(50, 50);
         bullet.setDirectionDegrees(290);
@@ -53,21 +56,44 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         tracker.addProjectile(bullet);
         bullet = new Bullet();
         bullet.setLocation(200, 200);
-        bullet.setDirectionDegrees(270);
+        bullet.setDirectionDegrees(x);
         bullet.setVelocity(75);
         bullet.setImage("redbullet.png");
         tracker.addProjectile(bullet);
         
-        Enemy enemy = new Enemy(getWidth(), getHeight());
-        bullet = new Bullet();
+        Enemy enemy = new Enemy(getWidth(), getHeight()); 
+        for(int i=0;i!=10;i++){
+        bullet = new Bullet();    
         bullet.setLocation(200, 200);
-        bullet.setDirectionDegrees(270);
-        bullet.setVelocity(75);
+        bullet.setDirectionDegrees(30*i);
+        bullet.setVelocity(600);
         bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, i*100);
+        }
         //tracker.addProjectile(bullet);
-        enemy.addBulletSpawn(bullet, 270, 10, 1000);
+        
         enemy.setLocation(50, 50);
         enemy.setVelocity(10, 20);
+        enemy.setImage("centrifuge.png");
+        enemy.setImageSize(30, 30);
+        tracker.addEnemy(enemy);
+       
+    }
+    public void spawnspinner(int xloc, int yloc, int xvel, int yvel){
+        Bullet bullet = new Bullet();
+        Enemy enemy = new Enemy(getWidth(), getHeight()); 
+        for(int i=0;i!=10;i++){
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(30*i);
+        bullet.setVelocity(600);
+        bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, i*100);
+        }
+        //tracker.addProjectile(bullet);
+        
+        enemy.setLocation(xloc,yloc);
+        enemy.setVelocity(xvel, yvel);
         enemy.setImage("centrifuge.png");
         enemy.setImageSize(30, 30);
         tracker.addEnemy(enemy);
