@@ -33,8 +33,9 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
         //demo();
-        spawnspinner(50,50,0,0);
-        spawnspinner(350,50,0,0);
+        spawnclockwisespinner(50,50,0,0);
+        wiper(350,50,0,0);
+        
         //canvas.placeholder();
         while(true){
             tracker.updateObjects();
@@ -79,16 +80,63 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         tracker.addEnemy(enemy);
        
     }
-    public void spawnspinner(int xloc, int yloc, int xvel, int yvel){
+    public void spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){
         Bullet bullet = new Bullet();
         Enemy enemy = new Enemy(getWidth(), getHeight()); 
-        for(int i=0;i!=10;i++){
+        for(int i=0;i!=12;i++){
         bullet = new Bullet();    
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(30*i);
         bullet.setVelocity(600);
         bullet.setImage("redbullet.png");
         enemy.addBulletSpawn(bullet, 90, 10, i*100);
+        }
+        //tracker.addProjectile(bullet);
+        
+        enemy.setLocation(xloc,yloc);
+        enemy.setVelocity(xvel, yvel);
+        enemy.setImage("centrifuge.png");
+        enemy.setImageSize(30, 30);
+        tracker.addEnemy(enemy);
+    }
+    public void spawncounterspinner(int xloc, int yloc, int xvel, int yvel){
+        Bullet bullet = new Bullet();
+        Enemy enemy = new Enemy(getWidth(), getHeight()); 
+        for(int i=0;i!=12;i++){
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(120+(-i*30));
+        bullet.setVelocity(600);
+        bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, i*100);
+        }
+        //tracker.addProjectile(bullet);
+        
+        enemy.setLocation(xloc,yloc);
+        enemy.setVelocity(xvel, yvel);
+        enemy.setImage("centrifuge.png");
+        enemy.setImageSize(30, 30);
+        tracker.addEnemy(enemy);
+    }
+    public void wiper(int xloc, int yloc, int xvel, int yvel){
+        
+        Bullet bullet = new Bullet();
+        Enemy enemy = new Enemy(getWidth(), getHeight()); 
+        for(int i=1;i!=18;i++){
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(-i*10);
+        bullet.setVelocity(200);
+        bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, i*100);
+        }
+        for(int i=1;i!=18;i++){
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(180+(i*10));
+        bullet.setVelocity(200);
+        bullet.setImage("redbullet.png");
+        enemy.addBulletSpawn(bullet, 90, 10, 1800+(i*100));
         }
         //tracker.addProjectile(bullet);
         
