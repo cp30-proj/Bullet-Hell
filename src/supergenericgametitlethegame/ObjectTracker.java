@@ -42,7 +42,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         removeOffScreenObjects();
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
-            //System.out.print("Bullet "+i+" location"+bullets.get(i).getX()+", "+bullets.get(i).getY()+"\n");
+            System.out.print("Bullet "+i+" location"+bullets.get(i).getX()+", "+bullets.get(i).getY()+"\n");
         }
         for(int i=0; i<enemies.size(); i++){
             ArrayList addbullets = enemies.get(i).getBullets(FRAME_PAUSE);

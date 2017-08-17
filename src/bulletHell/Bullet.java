@@ -13,6 +13,7 @@ import acm.graphics.GImage;
  */
 public class Bullet {
     GImage image = null;
+    String imgfile = "";
     double xvelocity = 0;
     double xlocation = 0;
     double yvelocity = 0;
@@ -62,35 +63,45 @@ public class Bullet {
     
     /**set image using the filename found in src/images */
     public void setImage(String filename){
+        imgfile = filename;
         image = new GImage(filename);
         sizex = image.getWidth();
         sizey = image.getWidth();
     }
     
-    public void setImage(GImage img){
+    /*public void setImage(GImage img){
         image = img;
         sizex = image.getWidth();
         sizey = image.getWidth();
-    }
+    }*/
     
     public void setImage(String filename, double sizex, double sizey){
+        imgfile = filename;
         image = new GImage(filename);
         image.setSize(sizex, sizey);
         this.sizex = sizex;
         this.sizey = sizey;
     }
     
-    public void setImage(GImage img, double sizex, double sizey){
+    /*public void setImage(GImage img, double sizex, double sizey){
         image = img;
         image.setSize(sizex, sizey);
         this.sizex = sizex;
         this.sizey = sizey;
-    }
+    }*/
     
     public void setImageSize(double sizex, double sizey){
         image.setSize(sizex, sizey);
         this.sizex = sizex;
         this.sizey = sizey;
+    }
+    
+    public GImage getImage(){
+        return image;
+    }
+    
+    public String getImageFile(){
+        return imgfile;
     }
     
     public double getXsize(){
@@ -99,10 +110,6 @@ public class Bullet {
     
     public double getYsize(){
         return sizey;
-    }
-    
-    public GImage getImage(){
-        return image;
     }
     
     public void setLocation(double x, double y){

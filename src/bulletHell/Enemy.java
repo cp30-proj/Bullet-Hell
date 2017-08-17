@@ -50,7 +50,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         }
     }
     
-    public void addBulletSpawn(GImage img, double newspawnpnt, double centerdistance, double speed, int spawntime){
+    public void addBulletSpawn(String img, double newspawnpnt, double centerdistance, double speed, int spawntime){
         Bullet newbullet = new Bullet();
         newbullet.setImage(img);
         newbullet.setDirectionDegrees(newspawnpnt);
@@ -80,7 +80,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
             if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
                 bullet = new Bullet();
-                bullet.setImage(bullettemplates.get(i).getImage());
+                bullet.setImage(bullettemplates.get(i).getImageFile());
                 bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
                 bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()-(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
                 newbullets.add(bullet);
