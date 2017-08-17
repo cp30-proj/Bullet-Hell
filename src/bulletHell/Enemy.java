@@ -14,8 +14,9 @@ import supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants;
  * @author Paolo
  */
 public class Enemy implements SuperGenericGameTitleTheGameConstants{
-    private int health;
+    private int health = 1;
     private GImage image = null;
+    private String imgfile = "";
     private double xvelocity = 0;
     private double xlocation = 0;
     private double yvelocity = 0;
@@ -71,6 +72,31 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         updateCycleTime();
     }
     
+    public void addCirclePattern(Bullet bullet, int numbullets, double speed, int spawntime){
+        Bullet newbullet;
+        double angleshift=(360/numbullets);
+        for(int i=0; i<numbullets; i++){
+            newbullet = new Bullet();
+            newbullet.setImage(bullet.getImageFile(), bullet.getXsize(), bullet.getYsize());
+            newbullet.setDirectionDegrees(angleshift*i);
+            newbullet.setVelocity(speed);
+            bullettemplates.add(newbullet);
+            spawntimes.add(spawntime);
+            spawnpoints.add(angleshift*i);
+            spawndistance.add(0.0);
+            alreadyspawned.add(Boolean.FALSE);
+        }
+        updateCycleTime();
+    }
+    
+    public void clearSpawns(){
+        bullettemplates.clear();
+        spawntimes.clear();
+        spawnpoints.clear();
+        spawndistance.clear();
+        alreadyspawned.clear();
+    }
+    
     public ArrayList getBullets(int time){
         //System.out.print(currenttime + "\n");
         ArrayList<Bullet> newbullets = new ArrayList<>();
@@ -98,13 +124,13 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         return newbullets;
     }
     
-    public void behaviorAction(){
+    private void behaviorAction(){
         if(behavior[0]){ 
             
         }
     }
     
-    private void setcyclebuffer(int buffer){
+    public void setcyclebuffer(int buffer){
         cyclebuffer = buffer;
     }
     
@@ -116,6 +142,18 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             }
         }
         cycle += cyclebuffer;
+    }
+    
+    public void setHealth(int hearts){
+        health = hearts;
+    }
+    
+    public void damage(int damage){
+        health-=damage;
+    }
+    
+    public int getHealth(){
+        return health;
     }
     
     public void updateLocation(double time){
@@ -154,6 +192,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     /**sets the direction in degrees*/
     public void setDirectionDegrees(double degree){
         direction = degree;
+        
     }
     
     public double getX(){
@@ -164,39 +203,34 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         return ylocation;
     }
     
-     /**set image using the filename found in src/images */
+    /**set image using the filename found in src/images */
     public void setImage(String filename){
+        imgfile = filename;
         image = new GImage(filename);
-        xsize = image.getWidth();
-        ysize = image.getWidth();
-    }
-    
-    public void setImage(GImage img){
-        image = img;
         xsize = image.getWidth();
         ysize = image.getWidth();
     }
     
     public void setImage(String filename, double xsize, double ysize){
+        imgfile = filename;
         image = new GImage(filename);
-        image.setSize(xsize, ysize);
-        this.xsize = xsize;
-        this.ysize = ysize;
-    }
-    
-    public void setImage(GImage img, double xsize, double ysize){
-        image = img;
         image.setSize(xsize, ysize);
         this.xsize = xsize;
         this.ysize = ysize;
     }
     
     public void setImageSize(double xsize, double ysize){
-        if(image!=null){
-            image.setSize(xsize, ysize);
-            this.xsize = xsize;
-            this.ysize = ysize;
-        }
+        image.setSize(xsize, ysize);
+        this.xsize = xsize;
+        this.ysize = ysize;
+    }
+    
+    public GImage getImage(){
+        return image;
+    }
+    
+    public String getImageFile(){
+        return imgfile;
     }
     
     public double getXsize(){
@@ -205,10 +239,6 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     
     public double getYsize(){
         return ysize;
-    }
-    
-    public GImage getImage(){
-        return image;
     }
     
     public void setLocation(double x, double y){
