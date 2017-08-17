@@ -72,7 +72,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         updateCycleTime();
     }
     
-    public void addCirclePattern(Bullet bullet, int numbullets, double speed, int spawntime){
+    public void addCirclePattern(Bullet bullet, int numbullets, double speed, int spawntime, double rotate){
         Bullet newbullet;
         double angleshift=(360/numbullets);
         for(int i=0; i<numbullets; i++){
@@ -82,7 +82,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             newbullet.setVelocity(speed);
             bullettemplates.add(newbullet);
             spawntimes.add(spawntime);
-            spawnpoints.add(angleshift*i);
+            spawnpoints.add((angleshift*i)*rotate);
             spawndistance.add(0.0);
             alreadyspawned.add(Boolean.FALSE);
         }
