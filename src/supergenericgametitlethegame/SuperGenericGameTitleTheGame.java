@@ -63,13 +63,16 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(300);
         bullet.setVelocity(300);
-        bullet.setImage("redbullet.png", 50, 50);
+        bullet.setImage("redbullet.png", 10.0, 10.0);
         //tracker.addProjectile(bullet);
-        enemy.addCirclePattern(bullet, 20, 300, 100, 10);
+        for(int i=1; i<=3; i++){
+            enemy.addCirclePattern(bullet, 6, 300, 100*i, 20*i);
+        }
+        
         enemy.setLocation(50, 50);
         enemy.setVelocity(10, 100);
         enemy.setImage("centrifuge.png");
-        enemy.setImageSize(30, 30);
+        enemy.setImageSize(100, 100);
         tracker.addEnemy(enemy);
     }
     

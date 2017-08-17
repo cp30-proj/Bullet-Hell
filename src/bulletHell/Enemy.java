@@ -78,11 +78,11 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         for(int i=0; i<numbullets; i++){
             newbullet = new Bullet();
             newbullet.setImage(bullet.getImageFile(), bullet.getXsize(), bullet.getYsize());
-            newbullet.setDirectionDegrees(angleshift*i);
+            newbullet.setDirectionDegrees((angleshift*i)+rotate);
             newbullet.setVelocity(speed);
             bullettemplates.add(newbullet);
             spawntimes.add(spawntime);
-            spawnpoints.add((angleshift*i)*rotate);
+            spawnpoints.add((angleshift*i)+rotate);
             spawndistance.add(0.0);
             alreadyspawned.add(Boolean.FALSE);
         }
@@ -106,9 +106,9 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
             if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
                 bullet = new Bullet();
-                bullet.setImage(bullettemplates.get(i).getImageFile());
+                bullet.setImage(bullettemplates.get(i).getImageFile(), bullettemplates.get(i).getXsize(), bullettemplates.get(i).getYsize());
                 bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
-                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()-(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
+                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()+(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
                 newbullets.add(bullet);
                 alreadyspawned.set(i, true);
                 //System.out.print("Making new bullet\n");
