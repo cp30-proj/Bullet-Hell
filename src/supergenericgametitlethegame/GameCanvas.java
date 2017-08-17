@@ -19,12 +19,14 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
     private GLabel placeholder = new GLabel("Placeholder");
     private Level Level = new Level();
     private Player Player = new Player();
+    private int currentlevel = 0;
     
     public void placeholder(){
         placeholder.setLocation(getWidth()/2, getHeight()/2);
         add(placeholder);
     }
     public void addbg(int level){
+        currentlevel=level;
         if(level==1){
            Level.setbglevel("testbg.png");
         }
@@ -38,6 +40,8 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
     }
     
     public void drawFrame(Stack bullets, Stack enemies){
+        removeAll();
+        addbg(currentlevel);
         while(!bullets.empty()){
             Bullet bullet = (Bullet)bullets.pop();
             add(bullet.getImage(), bullet.getX(), bullet.getY());

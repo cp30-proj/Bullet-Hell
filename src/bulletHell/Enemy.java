@@ -8,11 +8,12 @@ import acm.graphics.GImage;
 import bulletHell.Bullet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants;
 /**
  *
  * @author Paolo
  */
-public class Enemy{
+public class Enemy implements SuperGenericGameTitleTheGameConstants{
     private int health;
     private GImage image = null;
     private double xvelocity = 0;
@@ -28,7 +29,7 @@ public class Enemy{
     private double yboundary = 0;
     
     private int cycle = 3000;
-    private int cyclebuffer = 0;
+    private int cyclebuffer = FRAME_PAUSE;
     private int currenttime = 0;
     private int defaultspawntime = 3000;
     
@@ -36,6 +37,7 @@ public class Enemy{
     private ArrayList<Integer> spawntimes = new ArrayList<>();
     private ArrayList<Double> spawnpoints = new ArrayList<>(); //curcular points around the enemy where bullets will spawn
     private ArrayList<Double> spawndistance = new ArrayList<>();
+    private ArrayList<Boolean> alreadyspawned = new ArrayList<>();
     
     private int n_behaviors = 5;
     private boolean[] behavior = new boolean[5];
@@ -57,6 +59,7 @@ public class Enemy{
         spawntimes.add(spawntime);
         spawnpoints.add(newspawnpnt);
         spawndistance.add(centerdistance);
+        alreadyspawned.add(Boolean.FALSE);
         updateCycleTime();
     }
     public void addBulletSpawn(Bullet newbullet, double newspawnpnt, double centerdistance, int spawntime){
@@ -64,24 +67,34 @@ public class Enemy{
         spawntimes.add(spawntime);
         spawnpoints.add(newspawnpnt);
         spawndistance.add(centerdistance);
+        alreadyspawned.add(Boolean.FALSE);
         updateCycleTime();
     }
     
     public ArrayList getBullets(int time){
+        //System.out.print(currenttime + "\n");
         ArrayList<Bullet> newbullets = new ArrayList<>();
         currenttime+=time;
         Bullet bullet = null;
-        for(int i=1; i<spawntimes.size(); i++){
-            if(spawntimes.get(i)<currenttime){
+        for(int i=0; i<spawntimes.size(); i++){
+            //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
+            if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
                 bullet = new Bullet();
                 bullet.setImage(bullettemplates.get(i).getImage());
                 bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
-                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getXCenter()-(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
+                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()-(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
                 newbullets.add(bullet);
+                alreadyspawned.set(i, true);
+                //System.out.print("Making new bullet\n");
             }
         }
-        if(currenttime>cycle)
+        if(currenttime>cycle+cyclebuffer){
             currenttime=0;
+            for(int i=0; i<alreadyspawned.size(); i++){
+                alreadyspawned.set(i, Boolean.FALSE);
+            }
+        }
+            
         return newbullets;
     }
     
