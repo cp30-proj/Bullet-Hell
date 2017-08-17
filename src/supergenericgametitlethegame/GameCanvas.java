@@ -38,6 +38,21 @@ public class GameCanvas extends GCanvas implements SuperGenericGameTitleTheGameC
     public void setbglocation(int x){
         
     }
+    public boolean isPlayerHit(){
+            if( getElementAt(pImage.getX(),pImage.getY())!=null){
+                return true;
+            }
+            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY())!=null){
+                return true;
+            }
+            else if ( getElementAt(pImage.getX(),pImage.getY()+pImage.getHeight())!=null){
+                return true;
+            }
+            else if ( getElementAt(pImage.getX()+pImage.getWidth(),pImage.getY()+pImage.getHeight())!=null){
+                return true;
+            }
+            return false;
+   }
     
     public void drawFrame(Stack bullets, Stack enemies){
         removeAll();

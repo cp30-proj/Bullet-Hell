@@ -38,7 +38,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
             tracker.updateObjects();
             canvas.drawFrame(tracker.getBullets(), tracker.getEnemies());
             pause(FRAME_PAUSE);
-            
+            GameCanvas.isPlayerHit();
         }
     }
     
