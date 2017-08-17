@@ -18,19 +18,17 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private ObjectTracker tracker = new ObjectTracker();
     private Level Level = new Level();
     private Player Player = new Player();
-    private Queue meme;
     int x = 0;
     /**
      * @param args the command line arguments
      */
     
     public void init(){
-        pasttime = System.currentTimeMillis();
+        
         add(Score, NORTH);
         add(canvas);
+        canvas.addbg(1);
         
-        pasttime = System.currentTimeMillis() - pasttime;
-        currenttime = System.currentTimeMillis() - pasttime;
     }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
@@ -45,8 +43,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     }
     
     public void demo(){
-        pasttime = currenttime;
-        currenttime = System.currentTimeMillis() - pasttime;
+        
         
         Bullet bullet = new Bullet();
         bullet.setLocation(50, 50);
