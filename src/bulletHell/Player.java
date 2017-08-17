@@ -65,9 +65,9 @@ public class Player {
               pHealth--;
     }
     public void attackPlayer(){
-
+    }
             
-    public boolean isPlayerHit(){
+    /*public boolean isPlayerHit(){
             if( getElementAt(pImage.getX(),pImage.getY())!=null){
                 return true;
             }
@@ -81,5 +81,5 @@ public class Player {
                 return true;
             }
             return false;
-    }
+    }*/
 }
