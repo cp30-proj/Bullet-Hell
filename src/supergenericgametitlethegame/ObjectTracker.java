@@ -18,6 +18,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     private final LinkedList<Enemy> enemies = new LinkedList<>();
     private double xboundary = 0;
     private double yboundary = 0;
+    private Level Level = new Level();
     
     public void addProjectile(Bullet newbullet){
         bullets.add(newbullet);
@@ -41,6 +42,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         removeOffScreenObjects();
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
+            
         }
         for(int i=0; i<enemies.size(); i++){
             ArrayList addbullets = enemies.get(i).getBullets(FRAME_PAUSE);
