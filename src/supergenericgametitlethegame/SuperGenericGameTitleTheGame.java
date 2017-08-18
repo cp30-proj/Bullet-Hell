@@ -119,6 +119,13 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         level.addEnemySpawn(laser(320,100,0,0,270), 9500);
         level.addEnemySpawn(laser(150,100,0,0,270), 9500);
         level.addEnemySpawn(wiper(235,0,0,0), 10000);
+        level.addEnemySpawn(spawnclockwisespinner(235,0,0,350), 12000);
+        for(int i = 0;i!=2;i++){
+            level.addEnemySpawn(spawnclockwisespinner(285+(-i*100),0,0,350), 12200);
+        }
+        for(int i = 0;i!=2;i++){
+            level.addEnemySpawn(spawnclockwisespinner(335+(-i*200),0,0,350), 12400);
+        }
         
         //level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
         //level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
@@ -132,7 +139,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(30*i);
         bullet.setVelocity(600);
-        bullet.setImage("redbullet.png");
+        bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 150, 0, i*100);
         }
         //tracker.addProjectile(bullet);
