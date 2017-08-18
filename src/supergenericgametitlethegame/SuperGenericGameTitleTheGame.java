@@ -131,6 +131,19 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         for(int i = 0;i!=2;i++){
         level.addEnemySpawn(boomer(385+(-i*300),0,0,20), 16000);
         }
+        level.addEnemySpawn(spawncounterspinner(235,0,0,350), 17000);
+        for(int i = 0;i!=2;i++){
+            level.addEnemySpawn(spawncounterspinner(285+(-i*100),0,0,350), 17200);
+        }
+        for(int i = 0;i!=2;i++){
+            level.addEnemySpawn(spawncounterspinner(335+(-i*200),0,0,350), 17400);
+        }
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(spawncounterspinner(0,50,350,100), 19000+(i*200));
+        }
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(spawncounterspinner(470,100,-350,100), 20000+(i*200));
+        }
         //level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
         //level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
         
