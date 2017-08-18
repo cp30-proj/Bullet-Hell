@@ -50,6 +50,9 @@ public class Bullet {
     /**sets the direction in degrees*/
     public void setDirectionDegrees(double degree){
         direction = degree;
+        double velocity = Math.hypot(xvelocity, yvelocity);
+        xvelocity = velocity * Math.cos(direction);
+        yvelocity = velocity * Math.sin(direction)*(-1);
         
     }
     

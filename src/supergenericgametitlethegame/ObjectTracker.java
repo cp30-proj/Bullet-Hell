@@ -33,7 +33,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         enemies.add(newenemy);
     }
     public void addEnemy(Iterator newenemies){
-        while(!newenemies.hasNext()){
+        while(newenemies.hasNext()){
             enemies.add((Enemy)newenemies.next());
         }
     }

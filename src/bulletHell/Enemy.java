@@ -63,6 +63,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         alreadyspawned.add(Boolean.FALSE);
         updateCycleTime();
     }
+    
     public void addBulletSpawn(Bullet newbullet, double newspawnpnt, double centerdistance, int spawntime){
         bullettemplates.add(newbullet);
         spawntimes.add(spawntime);
@@ -142,6 +143,32 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             }
         }
         cycle += cyclebuffer;
+    }
+    
+    public ArrayList getSpawns(){
+        ArrayList spawns = new ArrayList();
+        ArrayList temp = new ArrayList();
+        temp.addAll(bullettemplates);
+        spawns.add(temp);
+        temp = new ArrayList();
+        temp.addAll(spawntimes);
+        spawns.add(temp);temp = new ArrayList();
+        temp.addAll(spawnpoints);
+        spawns.add(temp);temp = new ArrayList();
+        temp.addAll(spawndistance);
+        spawns.add(temp);temp = new ArrayList();
+        temp.addAll(alreadyspawned);
+        spawns.add(temp);
+        return spawns;
+    }
+    
+    public void setSpawns(ArrayList spawns){
+        bullettemplates = (ArrayList)spawns.get(0);
+        spawntimes = (ArrayList)spawns.get(1);
+        spawnpoints = (ArrayList)spawns.get(2);
+        spawndistance = (ArrayList)spawns.get(3);
+        alreadyspawned = (ArrayList)spawns.get(4);
+        updateCycleTime();
     }
     
     public void setHealth(int hearts){
