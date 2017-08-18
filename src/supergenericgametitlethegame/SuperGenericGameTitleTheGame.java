@@ -98,13 +98,30 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         tracker.addEnemy(enemy);
         */
         //tracker.addEnemy(spawnclockwisespinner(50,50,0,0));
-        wiper(350,50,0,0);
-        laser(350,50,-50,0,270);
+        //wiper(350,50,0,0);
+        //laser(350,50,-50,0,270);
         
         level = new Level();
-        level.addEnemySpawn(spawnclockwisespinner(50,50,50,50), 1000);
-        level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
-        level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(laser(0,50,200,0,270), 1000+(i*200));
+        }
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(laser(450,50,-200,0,270), 1000+(i*200));
+        }
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(laser(0,0,0,150,0), 4000+(i*800));
+        }
+        for(int i = 0;i!=5;i++){
+            level.addEnemySpawn(laser(450,0,0,150,180), 4800+(i*800));
+        }
+        level.addEnemySpawn(laser(450,0,0,0,270), 8000);
+        level.addEnemySpawn(laser(0,0,0,0,270), 8000);
+        level.addEnemySpawn(laser(300,100,0,0,270), 8500);
+        level.addEnemySpawn(laser(150,100,0,0,270), 8500);
+        level.addEnemySpawn(wiper(250,0,0,0), 9000);
+        
+        //level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
+        //level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
         
     }
     public Enemy spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){
@@ -145,7 +162,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         enemy.setImageSize(30, 30);
         return enemy;
     }
-    public void wiper(int xloc, int yloc, int xvel, int yvel){
+    public Enemy wiper(int xloc, int yloc, int xvel, int yvel){
         
         Bullet bullet = new Bullet();
         Enemy enemy = new Enemy(getWidth(), getHeight()); 
@@ -154,7 +171,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(-i*10);
         bullet.setVelocity(200);
-        bullet.setImage("redbullet.png");
+        bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 90, 10, i*100);
         }
         for(int i=1;i!=18;i++){
@@ -162,7 +179,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(180+(i*10));
         bullet.setVelocity(200);
-        bullet.setImage("redbullet.png");
+        bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 90, 10, 1800+(i*100));
         }
         //tracker.addProjectile(bullet);
@@ -171,9 +188,9 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         enemy.setVelocity(xvel, yvel);
         enemy.setImage("centrifuge.png");
         enemy.setImageSize(30, 30);
-        tracker.addEnemy(enemy);
+        return enemy;
     }
-    public void laser(int xloc, int yloc, int xvel, int yvel,int angle){
+    public Enemy laser(int xloc, int yloc, int xvel, int yvel,int angle){
         
         Bullet bullet = new Bullet();
         Enemy enemy = new Enemy(getWidth(), getHeight()); 
@@ -182,7 +199,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(angle);
         bullet.setVelocity(400);
-        bullet.setImage("redbullet.png");
+        bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 90, 10, 100);
        
         //tracker.addProjectile(bullet);
@@ -191,7 +208,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         enemy.setVelocity(xvel, yvel);
         enemy.setImage("centrifuge.png");
         enemy.setImageSize(30, 30);
-        tracker.addEnemy(enemy);
+        return enemy;
     }
     
     public void placeholder(){
