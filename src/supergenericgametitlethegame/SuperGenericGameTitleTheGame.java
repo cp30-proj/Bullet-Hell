@@ -23,7 +23,7 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     private Player Player = new Player();
     int x = 0;
     int currentlevel = 1;
-    InputStream music;
+    InputStream music;                
     /**
      * @param args the command line arguments
      */
@@ -99,6 +99,8 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         
         level = new Level();
         level.addEnemySpawn(spawnclockwisespinner(50,50,50,50), 1000);
+        level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
+        level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
         
     }
     public Enemy spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){

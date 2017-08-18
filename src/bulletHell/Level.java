@@ -51,6 +51,7 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
                 enemy = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT);
                 enemy.setImage(enemytemplates.get(i).getImageFile(), enemytemplates.get(i).getXsize(), enemytemplates.get(i).getYsize());
                 enemy.setVelocity(enemytemplates.get(i).getXVelocity(), enemytemplates.get(i).getYVelocity());
+                enemy.setLocation(enemytemplates.get(i).getX(), enemytemplates.get(i).getY());
                 enemy.setSpawns(enemytemplates.get(i).getSpawns());
                 newenemies.add(enemy);
                 alreadyspawned.set(i, true);
