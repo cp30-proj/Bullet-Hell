@@ -4,26 +4,30 @@
  * and open the template in the editor.
  */
 package supergenericgametitlethegame;
+import acm.graphics.GLabel;
 import bulletHell.*;
 import acm.program.*;
 import javax.swing.JLabel;
 import java.io.*;
+import java.util.Stack;
 import java.util.logging.Logger;
 import sun.audio.*;
 /**
  *
  * @author Paolo
  */
-public class SuperGenericGameTitleTheGame extends Program implements SuperGenericGameTitleTheGameConstants{
+public class SuperGenericGameTitleTheGame extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants{
     private Bullet samplebullet = new Bullet();
-    private GameCanvas canvas = new GameCanvas();
+    //private GameCanvas  = new GameCanvas();
     private JLabel Score = new JLabel("Placeholder");
     private ObjectTracker tracker = new ObjectTracker();
     private Level level = null;
     private Player Player = new Player();
     int x = 0;
     int currentlevel = 1;
-    InputStream music;                
+    InputStream music;
+    
+    private GLabel placeholder = new GLabel("Placeholder");
     /**
      * @param args the command line arguments
      */
@@ -31,8 +35,8 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     public void init(){
         
         add(Score, NORTH);
-        add(canvas);
-        canvas.addbg(1);
+        
+        addbg(1);
         try {
             music();
         } catch (IOException ex) {
@@ -43,11 +47,11 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
         demo();
-        //canvas.placeholder();
+        //placeholder();
         while(true){
             
             tracker.updateObjects();
-            canvas.drawFrame(tracker.getBullets(), tracker.getEnemies());
+            drawFrame(tracker.getBullets(), tracker.getEnemies());
             pause(FRAME_PAUSE);
             tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
             
@@ -188,6 +192,53 @@ public class SuperGenericGameTitleTheGame extends Program implements SuperGeneri
         enemy.setImage("centrifuge.png");
         enemy.setImageSize(30, 30);
         tracker.addEnemy(enemy);
+    }
+    
+    public void placeholder(){
+        placeholder.setLocation(getWidth()/2, getHeight()/2);
+        add(placeholder);
+    }
+    public void addbg(int level){
+        currentlevel=level;
+        if(level==1){
+           Level.setbglevel("testbg.png");
+        }
+        add(Level.bg,0,0);
+    }
+    public void addplayer(){
+        add(Player.pImage);
+    }
+    public void setbglocation(int x){
+        
+    }
+    
+    public boolean isPlayerHit(){
+            if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null){
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=null){
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
+                return true;
+            }
+            return false;
+   }
+    
+    public void drawFrame(Stack bullets, Stack enemies){
+        removeAll();
+        addbg(currentlevel);
+        while(!bullets.empty()){
+            Bullet bullet = (Bullet)bullets.pop();
+            add(bullet.getImage(), bullet.getX(), bullet.getY());
+        }
+        while(!enemies.empty()){
+            Enemy enemy = (Enemy)enemies.pop();
+            add(enemy.getImage(), enemy.getX(), enemy.getY());
+        }
     }
     
     public static void main(String[] args) {

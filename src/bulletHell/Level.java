@@ -16,13 +16,8 @@ import supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants;
  * @author Paolo
  */
 public class Level implements SuperGenericGameTitleTheGameConstants{
-    public GImage bg;
-    public void setbglevel(String filename){
-            bg = new GImage(filename);     
-    }
-    public void setmusiclevel(int level){
-        
-    }
+    public static GImage bg;
+    
     private double xboundary = 0;
     private double yboundary = 0;
     
@@ -61,6 +56,11 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
         return newenemies;
     }
     
-    
+    public static void setbglevel(String filename){
+            bg = new GImage(filename);     
+    }
+    public static void setmusiclevel(int level){
+        
+    }
     
 }
