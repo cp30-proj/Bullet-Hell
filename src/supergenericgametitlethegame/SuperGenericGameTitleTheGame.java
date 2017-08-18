@@ -119,12 +119,12 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         level.addEnemySpawn(laser(320,100,0,0,270), 9500);
         level.addEnemySpawn(laser(150,100,0,0,270), 9500);
         level.addEnemySpawn(wiper(235,0,0,0), 10000);
-        level.addEnemySpawn(spawnclockwisespinner(235,0,0,350), 12000);
+        level.addEnemySpawn(spawncounterspinner(235,0,0,350), 12000);
         for(int i = 0;i!=2;i++){
-            level.addEnemySpawn(spawnclockwisespinner(285+(-i*100),0,0,350), 12200);
+            level.addEnemySpawn(spawncounterspinner(285+(-i*100),0,0,350), 12200);
         }
         for(int i = 0;i!=2;i++){
-            level.addEnemySpawn(spawnclockwisespinner(335+(-i*200),0,0,350), 12400);
+            level.addEnemySpawn(spawncounterspinner(335+(-i*200),0,0,350), 12400);
         }
         level.addEnemySpawn(wiper(235,0,0,20), 13000);
         level.addEnemySpawn(boomer(235,0,0,20), 16000);
@@ -162,7 +162,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setLocation(200, 200);
         bullet.setDirectionDegrees(120+(-i*30));
         bullet.setVelocity(600);
-        bullet.setImage("redbullet.png");
+        bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 150, 10, i*100);
         }
         //tracker.addProjectile(bullet);
@@ -237,7 +237,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         
         enemy.setLocation(xloc,yloc);
         enemy.setVelocity(xvel, yvel);
-        enemy.setImage("centrifuge.png");
+        enemy.setImage("boomer.gif");
         enemy.setImageSize(30, 30);
         return enemy;
     }
