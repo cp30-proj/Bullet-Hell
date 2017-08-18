@@ -28,7 +28,7 @@ public class Player extends GraphicsProgram {
 
 
     
-    public GImage pImage = new GImage("fuck.png");
+    public GImage pImage = new GImage("player.gif",80,80);
       
   
     double x=100;
