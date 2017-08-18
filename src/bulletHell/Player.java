@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package bulletHell;
-
+import acm.graphics.*;
+import acm.program.*;
+import acm.util.*;
 import acm.graphics.*;
 import acm.graphics.GImage;
 import java.awt.event.*;
@@ -13,20 +15,21 @@ import java.awt.event.*;
  *
  * @author jiggy
  */
-public class Player {
-
+public class Player extends GraphicsProgram {
+    
     double pHealth = 100;
-    double xCoord = 0;
-    double yCoord = 0;
+    double xCoord = 100;
+    double yCoord = 100;
     double startX = 0;
     double startY = 0;
    
     double insertstartingXcoordinate=0;
     double insertstartingYcoordinate=0;
+
+
     
- 
     public GImage pImage = new GImage("fuck.png");
-        
+      
   
     double x=100;
     double y= 100;
@@ -56,16 +59,33 @@ public class Player {
                     break;
             }
         }
-    public void mouseMoved(MouseEvent me){
-        pImage.setLocation(me.getX()-0.5*pImage.getWidth(),me.getY()-0.5*pImage.getHeight());
-    }
+        
     
     public void damagePlayer(){
           //if (isPlayerHit())
               pHealth--;
     }
+    public double getHealth(){
+        return pHealth;
+    }
+    
+
     public void attackPlayer(){
         
+    }
+
+    public void setXCoordinate (double XCoor){
+        xCoord = XCoor;
+    }
+   public void setYCoordinate (double YCoor){
+        yCoord = YCoor;
+    }
+     public double getXCoordinate (){
+       return  xCoord;
+    }
+    
+        public double getYCoordinate (){
+        return yCoord;
     }
 
             

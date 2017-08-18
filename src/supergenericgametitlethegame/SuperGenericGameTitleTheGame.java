@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.Stack;
 import java.util.logging.Logger;
 import sun.audio.*;
+import java.awt.event.*;
 /**
  *
  * @author Paolo
@@ -19,10 +20,11 @@ import sun.audio.*;
 public class SuperGenericGameTitleTheGame extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants{
     private Bullet samplebullet = new Bullet();
     //private GameCanvas  = new GameCanvas();
-    private JLabel Score = new JLabel("Placeholder");
+    private JLabel Score = new JLabel("Placeholder");   
     private ObjectTracker tracker = new ObjectTracker();
     private Level level = null;
     private Player Player = new Player();
+   private JLabel Health = new JLabel("Health: "+ Player.getHealth());
     int x = 0;
     int currentlevel = 1;
     InputStream music;
@@ -33,9 +35,9 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
      */
     
     public void init(){
-        
+        addMouseListeners();
         add(Score, NORTH);
-        
+        add(Health, NORTH);
         addbg(1);
         try {
             music();
@@ -44,6 +46,27 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         }
         
     }
+        public boolean isPlayerHit(){
+            if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Level.bg){
+                
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=Level.bg){
+                
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!= null&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=Level.bg){
+                return true;
+            }
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=Level.bg&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=Player.pImage){
+                return true;
+            }
+            return false;
+   }
+                    public void mouseMoved(MouseEvent me){
+                Player.setXCoordinate(me.getX()-0.5*Player.pImage.getWidth());
+                Player.setYCoordinate(me.getY()-0.5*Player.pImage.getHeight());
+            }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
         demo();
@@ -53,8 +76,12 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             tracker.updateObjects();
             drawFrame(tracker.getBullets(), tracker.getEnemies());
             pause(FRAME_PAUSE);
+            if(level!=null)
             tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
-            
+            if(isPlayerHit()){
+                Player.damagePlayer();
+            }
+            Health.setText("Health"+ Player.getHealth());
         }
     }
     public void music() throws FileNotFoundException, IOException{
@@ -212,25 +239,12 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         
     }
     
-    public boolean isPlayerHit(){
-            if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null){
-                return true;
-            }
-            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=null){
-                return true;
-            }
-            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
-                return true;
-            }
-            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=null){
-                return true;
-            }
-            return false;
-   }
+
     
     public void drawFrame(Stack bullets, Stack enemies){
         removeAll();
         addbg(currentlevel);
+        add(Player.pImage, Player.getXCoordinate(), Player.getYCoordinate() );
         while(!bullets.empty()){
             Bullet bullet = (Bullet)bullets.pop();
             add(bullet.getImage(), bullet.getX(), bullet.getY());
@@ -239,6 +253,9 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             Enemy enemy = (Enemy)enemies.pop();
             add(enemy.getImage(), enemy.getX(), enemy.getY());
         }
+
+
+        
     }
     
     public static void main(String[] args) {
