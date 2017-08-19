@@ -54,6 +54,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         Player.addBulletSpawn(bullet, 90, 10, 10);
         }
         tracker.setPlayer(Player);
+        boss.initBoss();
     }
     
         public boolean isPlayerHit(){
@@ -92,9 +93,10 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         //placeholder();
         while(true){
             demo();
+            tracker.clearLists();
             while(Player.getHealth()>0){
+                
                 tracker.updateObjects();
-                drawFrame(tracker.getBullets(), tracker.getEnemies());
                 pause(FRAME_PAUSE);
                 if(level!=null&&boss!=null){
                     if(!level.isLevelFinished())
@@ -107,6 +109,8 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
                     Player.damagePlayer(1);
                 }
                 Health.setText("Health"+ (Player.getHealth()-(Player.getHealth()%1)) + "  \tScore: "+Player.getScore());
+                drawFrame(tracker.getBullets(), tracker.getEnemies());
+                
             }
             pause(3000);
             tracker.clearLists();

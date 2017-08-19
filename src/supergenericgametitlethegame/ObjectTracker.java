@@ -92,6 +92,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     private void removeOffScreenObjects(){
         double x = 0;
         double y = 0;
+        if(!bullets.isEmpty()){
         for(int i=bullets.size()-1; i>=0; i--){
             x = bullets.get(i).getX();
             y = bullets.get(i).getY();
@@ -99,12 +100,15 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
                 bullets.remove(i);
             }
         }
+        }
+        if(!enemies.isEmpty()){
         for(int i=enemies.size()-1; i>=0; i--){
             x = enemies.get(i).getX();
             y = enemies.get(i).getY();
             if((x>(xboundary + OFFSCREEN_BUFFER)) || (x<(0-enemies.get(i).getXsize()-OFFSCREEN_BUFFER)) || (y>(yboundary + OFFSCREEN_BUFFER)) || (y<(0-enemies.get(i).getYsize()-OFFSCREEN_BUFFER))){
                 enemies.remove(i);
             }
+        }
         }
     }
     

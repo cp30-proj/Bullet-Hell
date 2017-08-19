@@ -131,7 +131,10 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     
     private void behaviorAction(){
         if(behavior[0]){ 
-            
+            if(xlocation<0 || (xlocation+xsize)>xboundary)
+                xvelocity*=-1;
+            if(ylocation<0 || (ylocation+ysize)>yboundary)
+                yvelocity*=-1;
         }
     }
     

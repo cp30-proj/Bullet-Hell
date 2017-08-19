@@ -32,4 +32,6 @@ public interface SuperGenericGameTitleTheGameConstants {
     
     public static final int MAX_PLAYER_HEALTH = 100;
     
+    public static final int STAY_ON_SCREEN = 0;
+    
 }
