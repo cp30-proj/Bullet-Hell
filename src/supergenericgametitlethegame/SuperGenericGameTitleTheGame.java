@@ -319,6 +319,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
     public void drawFrame(Stack bullets, Stack enemies){
         removeAll();
         addbg(currentlevel);
+        Player.pImage.setSize(50, 50);
         add(Player.pImage, Player.getXCoordinate(), Player.getYCoordinate() );
         while(!bullets.empty()){
             Bullet bullet = (Bullet)bullets.pop();

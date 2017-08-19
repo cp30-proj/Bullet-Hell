@@ -40,7 +40,7 @@ public class Player extends GraphicsProgram implements SuperGenericGameTitleTheG
     private ArrayList<Double> spawndistance = new ArrayList<>();
     private ArrayList<Boolean> alreadyspawned = new ArrayList<>();
     
-    public GImage pImage = new GImage("fuck.png");
+    public GImage pImage = new GImage("player.gif");
       
   
     double x=100;
