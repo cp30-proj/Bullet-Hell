@@ -56,6 +56,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         for(int i=0; i<enemies.size(); i++){
             if(enemyHit(enemies.get(i))){
                 enemies.get(i).damage(PLAYER_DAMAGE);
+                
                 if(!deathrow.contains(enemies.get(i)))
                     player.healHealth();
             }
@@ -64,8 +65,9 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
                 System.out.print("bullets recieves\n");
                 bullets.add((Bullet)addbullets.get(j));
             }
-            if(enemies.get(i).getHealth()<0){
+            if(enemies.get(i).getHealth()<0 && !deathrow.contains(enemies.get(i))){
                 deathrow.add(enemies.get(i));
+                player.addScore(10);
             }
             enemies.get(i).updateLocation(FRAME_PAUSE);
         }
@@ -140,5 +142,12 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     public void setBounds(double xbound, double ybound){
         xboundary = xbound;
         yboundary = ybound;
+    }
+    
+    public void clearLists(){
+        enemies.clear();
+        bullets.clear();
+        deathrow.clear();
+        
     }
 }

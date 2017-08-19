@@ -20,6 +20,7 @@ import static supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants
 public class Player extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants {
     
     double pHealth = 100;
+    int score=0;
     double xCoord = 100;
     double yCoord = 100;
     double startX = 0;
@@ -72,10 +73,13 @@ public class Player extends GraphicsProgram implements SuperGenericGameTitleTheG
             }
         }
         
-    
-    public void damagePlayer(){
+    public void reset(){
+        pHealth = MAX_PLAYER_HEALTH;
+        score=0;
+    }
+    public void damagePlayer(double damage){
           //if (isPlayerHit())
-              pHealth--;
+              pHealth-=damage;
     }
         private void updateCycleTime(){
         cycle=0;
@@ -92,6 +96,16 @@ public class Player extends GraphicsProgram implements SuperGenericGameTitleTheG
             if(pHealth > 100)
                pHealth = 100; 
         }
+        
+        public void addScore(int plus){
+            score += plus;
+        }
+        
+        public int getScore(){
+            return score;
+        }
+        
+        
     public void addBulletSpawn(String img, double newspawnpnt, double centerdistance, double speed, int spawntime){
         Bullet newbullet = new Bullet();
         newbullet.setImage(img);

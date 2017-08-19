@@ -19,8 +19,6 @@ import java.awt.event.*;
  */
 public class SuperGenericGameTitleTheGame extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants{
     private Bullet samplebullet = new Bullet();
-    //private GameCanvas  = new GameCanvas();
-    private JLabel Score = new JLabel("Placeholder");   
     private ObjectTracker tracker = new ObjectTracker();
     private Level level = null;
     private Player Player = new Player();
@@ -38,7 +36,6 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
     public void init(){
         addKeyListeners();
         addMouseListeners();
-        add(Score, NORTH);
         add(Health, NORTH);
         addbg(1);
         try {
@@ -56,36 +53,6 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         tracker.setPlayer(Player);
     }
     
-    /*public void enemyCollisions(){
-        Stack<Enemy>stackofenemies = tracker.getEnemies();
-        for(int i=0; i<stackofenemies.size(); i++){
-            if(isEnemyHit(stackofenemies.peek())){
-                stackofenemies.peek().damage(1);
-                
-            }
-            stackofenemies.pop();
-        }
-    }
-    
-        /*public boolean isEnemyHit(Enemy eminem){
-            if( getElementAt(eminem.getX(),eminem.getY())!=null&&getElementAt(eminem.getX(),eminem.getY())!=Player.pImage&&getElementAt(eminem.getX(),eminem.getY())!=Level.bg){
-                
-                return true;
-            }
-            else if ( getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=null&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=Player.pImage&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=Level.bg){
-                
-                return true;
-            }
-            else if ( getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!= null&&getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!=Player.pImage&&getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!=Level.bg){
-                return true;
-            }
-            else if ( getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=null&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=Level.bg&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=Player.pImage){
-                return true;
-            }
-            return false;
-            
-            
-        }*/
         public boolean isPlayerHit(){
             if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Level.bg){
                 
@@ -118,21 +85,23 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
-        demo();
         //placeholder();
         while(true){
-            
-            tracker.updateObjects();
-            drawFrame(tracker.getBullets(), tracker.getEnemies());
-            pause(FRAME_PAUSE);
-            if(level!=null)
-            tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
-            //enemyCollisions();
-            if(isPlayerHit()){
-                Player.damagePlayer();
+            demo();
+            while(Player.getHealth()>0){
+                tracker.updateObjects();
+                drawFrame(tracker.getBullets(), tracker.getEnemies());
+                pause(FRAME_PAUSE);
+                if(level!=null)
+                    tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
+                if(isPlayerHit()){
+                    Player.damagePlayer(1);
+                }
+                Health.setText("Health"+ (Player.getHealth()-(Player.getHealth()%1)) + "  \tScore: "+Player.getScore());
             }
-
-            Health.setText("Health"+ (Player.getHealth()-(Player.getHealth()%1)));
+            pause(3000);
+            tracker.clearLists();
+            Player.reset();
         }
     }
     public void music() throws FileNotFoundException, IOException{
@@ -143,41 +112,6 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
     }
     
     public void demo(){
-        /*
-        Bullet bullet2 = new Bullet();
-        Bullet bullet = new Bullet();
-        bullet.setLocation(50, 50);
-        bullet.setDirectionDegrees(290);
-        bullet.setVelocity(200);
-        bullet.setImage("bluebullet.png");
-        tracker.addProjectile(bullet);
-        bullet = new Bullet();
-        bullet.setLocation(200, 200);
-        bullet.setDirectionDegrees(x);
-        bullet.setVelocity(75);
-        bullet.setImage("redbullet.png");
-        tracker.addProjectile(bullet);
-        
-        Enemy enemy = new Enemy(getWidth(), getHeight()); 
-        for(int i=0;i!=10;i++){
-        bullet = new Bullet();    
-        bullet.setLocation(200, 200);
-        bullet.setDirectionDegrees(30*i);
-        bullet.setVelocity(600);
-        bullet.setImage("redbullet.png");
-        enemy.addBulletSpawn(bullet, 90, 10, i*100);
-        }
-        //tracker.addProjectile(bullet);
-        
-        enemy.setLocation(50, 50);
-        enemy.setVelocity(10, 100);
-        enemy.setImage("centrifuge.png");
-        enemy.setImageSize(100, 100);
-        tracker.addEnemy(enemy);
-        */
-        //tracker.addEnemy(spawnclockwisespinner(50,50,0,0));
-        //wiper(350,50,0,0);
-        //laser(350,50,-50,0,270);
         
         level = new Level();
         for(int i = 0;i!=5;i++){
@@ -250,9 +184,6 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         for(int i = 0;i!=10;i++){
             level.addEnemySpawn(laser(470,0,0,200,180), 30000+(i*200));
         }
-        
-        //level.addEnemySpawn(spawnclockwisespinner(200,50,-50,50), 2000);
-        //level.addEnemySpawn(spawnclockwisespinner(50,500,50,-50), 3000);
         
     }
     public Enemy spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){

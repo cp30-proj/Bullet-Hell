@@ -30,4 +30,6 @@ public interface SuperGenericGameTitleTheGameConstants {
     
     public static final double EXPLOSION_SIZE = 100;
     
+    public static final int MAX_PLAYER_HEALTH = 100;
+    
 }
