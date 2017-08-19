@@ -86,6 +86,12 @@ public class Player extends GraphicsProgram implements SuperGenericGameTitleTheG
         }
         cycle += cyclebuffer;
     }
+        public void healHealth(){
+            pHealth = pHealth +0.05;
+            
+            if(pHealth > 100)
+               pHealth = 100; 
+        }
     public void addBulletSpawn(String img, double newspawnpnt, double centerdistance, double speed, int spawntime){
         Bullet newbullet = new Bullet();
         newbullet.setImage(img);

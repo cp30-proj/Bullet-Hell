@@ -56,6 +56,8 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         for(int i=0; i<enemies.size(); i++){
             if(enemyHit(enemies.get(i))){
                 enemies.get(i).damage(PLAYER_DAMAGE);
+                if(!deathrow.contains(enemies.get(i)))
+                    player.healHealth();
             }
             ArrayList addbullets = enemies.get(i).getBullets(FRAME_PAUSE);
             for(int j=0; j<addbullets.size(); j++){
@@ -128,6 +130,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
             if(collision){
                 System.out.print("Collison Detect Bullet: "+i+"\n");
                 bullets.remove(i);
+                
                 break;
             }
         }
