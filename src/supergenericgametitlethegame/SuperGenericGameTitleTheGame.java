@@ -51,9 +51,10 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setVelocity(690);
         bullet.setImage("bluebullet.png", 30,30);
         Player.addBulletSpawn(bullet, 90, 10, 10);
+        tracker.setPlayer(Player);
     }
     
-    public void enemyCollisions(){
+    /*public void enemyCollisions(){
         Stack<Enemy>stackofenemies = tracker.getEnemies();
         for(int i=0; i<stackofenemies.size(); i++){
             if(isEnemyHit(stackofenemies.peek())){
@@ -64,7 +65,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         }
     }
     
-        public boolean isEnemyHit(Enemy eminem){
+        /*public boolean isEnemyHit(Enemy eminem){
             if( getElementAt(eminem.getX(),eminem.getY())!=null&&getElementAt(eminem.getX(),eminem.getY())!=Player.pImage&&getElementAt(eminem.getX(),eminem.getY())!=Level.bg){
                 
                 return true;
@@ -82,7 +83,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             return false;
             
             
-        }
+        }*/
         public boolean isPlayerHit(){
             if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Level.bg){
                 
@@ -124,7 +125,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             pause(FRAME_PAUSE);
             if(level!=null)
             tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
-            enemyCollisions();
+            //enemyCollisions();
             if(isPlayerHit()){
                 Player.damagePlayer();
             }

@@ -116,6 +116,7 @@ public class Player extends GraphicsProgram implements SuperGenericGameTitleTheG
             //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
             if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
                 bullet = new Bullet();
+                bullet.setfromplayer();
                 bullet.setImage(bullettemplates.get(i).getImageFile(), bullettemplates.get(i).getXsize(), bullettemplates.get(i).getYsize());
                 bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
                 bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()+(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));

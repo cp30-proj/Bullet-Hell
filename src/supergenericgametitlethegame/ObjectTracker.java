@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package supergenericgametitlethegame;
+import acm.graphics.GRectangle;
 import bulletHell.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +21,12 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     private final Queue<Enemy> deathrow = new LinkedList<>();
     private double xboundary = 0;
     private double yboundary = 0;
+    private Player player = null;
     private Level Level = new Level();
+    
+    public void setPlayer(Player newPlayer){
+        player = newPlayer;
+    }
     
     public void addProjectile(Bullet newbullet){
         bullets.add(newbullet);
@@ -45,9 +51,12 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
         removeDeadEnemies();
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
-            System.out.print("Bullet "+i+" location"+bullets.get(i).getX()+", "+bullets.get(i).getY()+"\n");
+            //System.out.print("Bullet "+i+" location"+bullets.get(i).getX()+", "+bullets.get(i).getY()+"\n");
         }
         for(int i=0; i<enemies.size(); i++){
+            if(enemyHit(enemies.get(i))){
+                enemies.get(i).damage(PLAYER_DAMAGE);
+            }
             ArrayList addbullets = enemies.get(i).getBullets(FRAME_PAUSE);
             for(int j=0; j<addbullets.size(); j++){
                 System.out.print("bullets recieves\n");
@@ -58,7 +67,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
             }
             enemies.get(i).updateLocation(FRAME_PAUSE);
         }
-        System.out.print("Current Bullets: "+ bullets.size()+"\nCurrent Enemies: "+enemies.size()+"\n");
+        //System.out.print("Current Bullets: "+ bullets.size()+"\nCurrent Enemies: "+enemies.size()+"\n");
     }
     
     public Stack getBullets(){
@@ -104,6 +113,21 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
                 deathrow.remove();
             }
         }
+    }
+    
+    public Boolean enemyHit(Enemy enemy){
+        boolean collision=false;
+        GRectangle enemyrect = new GRectangle(enemy.getX()-(enemy.getXsize()/2), enemy.getY()-(enemy.getYsize()/2), enemy.getXsize(), enemy.getYsize());
+        GRectangle bulletrect;
+        for(int i=0; i<bullets.size(); i++){
+            bulletrect = new GRectangle(bullets.get(i).getX()-(bullets.get(i).getXsize()/2), bullets.get(i).getY()-(bullets.get(i).getYsize()/2), bullets.get(i).getXsize(), bullets.get(i).getYsize());
+            collision = enemyrect.intersects(bulletrect) && bullets.get(i).isFromPlayer();
+            if(collision){
+                System.out.print("Collison Detect Bullet: "+i+"\n");
+                break;
+            }
+        }
+        return collision;
     }
     
     public void setBounds(double xbound, double ybound){

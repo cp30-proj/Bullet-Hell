@@ -15,7 +15,7 @@ import supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants;
  */
 public class Enemy implements SuperGenericGameTitleTheGameConstants{
     private int health = 1;
-    private GImage image = null;
+    private BHImage image = new BHImage();
     private String imgfile = "";
     private double xvelocity = 0;
     private double xlocation = 0;
@@ -190,8 +190,9 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     }
     
     public void kill(){
+        clearSpawns();
         health=-1;
-        image = new GImage(dyinganimation, xsize, ysize);
+        image.setImage(new GImage(dyinganimation, xsize, ysize));
     }
     
     public int getHealth(){
@@ -251,27 +252,30 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     /**set image using the filename found in src/images */
     public void setImage(String filename){
         imgfile = filename;
-        image = new GImage(filename);
-        xsize = image.getWidth();
-        ysize = image.getWidth();
+        image.setImage(new GImage(filename));
+        xsize = image.getImage().getWidth();
+        ysize = image.getImage().getWidth();
     }
+    
     
     public void setImage(String filename, double xsize, double ysize){
         imgfile = filename;
-        image = new GImage(filename);
-        image.setSize(xsize, ysize);
+        image.setImage(new GImage(filename));
+        image.getImage().setSize(xsize, ysize);
         this.xsize = xsize;
         this.ysize = ysize;
     }
     
+    
+    
     public void setImageSize(double xsize, double ysize){
-        image.setSize(xsize, ysize);
+        image.getImage().setSize(xsize, ysize);
         this.xsize = xsize;
         this.ysize = ysize;
     }
     
     public GImage getImage(){
-        return image;
+        return image.getImage();
     }
     
     public String getImageFile(){

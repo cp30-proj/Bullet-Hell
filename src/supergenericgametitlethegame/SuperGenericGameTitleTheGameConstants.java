@@ -26,4 +26,6 @@ public interface SuperGenericGameTitleTheGameConstants {
     
     public static final String DEFAULT_DYING_ANIMATION_FILE = "";
     
+    public static final int PLAYER_DAMAGE = 1;
+    
 }

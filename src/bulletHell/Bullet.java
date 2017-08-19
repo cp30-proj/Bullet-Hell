@@ -12,8 +12,9 @@ import acm.graphics.GImage;
  * @author Paolo
  */
 public class Bullet {
-    Enemy shooter = null;
-    GImage image = null;
+    Object shooter = null;
+    boolean isfromplayer=false;
+    BHImage image = new BHImage();
     String imgfile = "";
     double xvelocity = 0;
     double xlocation = 0;
@@ -28,7 +29,15 @@ public class Bullet {
         shooter = gun;
     }
     
-    public Enemy getShooter(){
+    public void setfromplayer(){
+        isfromplayer=true;
+    }
+    
+    public boolean isFromPlayer(){
+        return isfromplayer;
+    }
+    
+    public Object getShooter(){
         return shooter;
     }
     
@@ -75,9 +84,9 @@ public class Bullet {
     /**set image using the filename found in src/images */
     public void setImage(String filename){
         imgfile = filename;
-        image = new GImage(filename);
-        sizex = image.getWidth();
-        sizey = image.getWidth();
+        image.setImage(new GImage(filename));
+        sizex = image.getImage().getWidth();
+        sizey = image.getImage().getWidth();
     }
     
     /*public void setImage(GImage img){
@@ -88,8 +97,8 @@ public class Bullet {
     
     public void setImage(String filename, double sizex, double sizey){
         imgfile = filename;
-        image = new GImage(filename);
-        image.setSize(sizex, sizey);
+        image.setImage(new GImage(filename));
+        image.getImage().setSize(sizex, sizey);
         this.sizex = sizex;
         this.sizey = sizey;
     }
@@ -102,13 +111,13 @@ public class Bullet {
     }*/
     
     public void setImageSize(double sizex, double sizey){
-        image.setSize(sizex, sizey);
+        image.getImage().setSize(sizex, sizey);
         this.sizex = sizex;
         this.sizey = sizey;
     }
     
     public GImage getImage(){
-        return image;
+        return image.getImage();
     }
     
     public String getImageFile(){
