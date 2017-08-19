@@ -82,6 +82,9 @@ public class GraphDP <E>{
     
     public int getNumConnections(E vertex){
         int v = vertices.indexOf(vertex);
+        if(v==-1){
+            return 0;
+        }
         int numconnect=0;
         for(int j=0; j<vertices.size(); j++){
             if(edges[v][j]>0){
@@ -96,7 +99,7 @@ public class GraphDP <E>{
     }
     
     public int getnumvert(){
-        return numvertex;
+        return vertices.size();
     }
     public int getIndexV(E vert){
         return vertices.indexOf(vert);

@@ -55,16 +55,15 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
         ArrayList<Enemy> newenemies = new ArrayList<>();
         Enemy current = bigboss;
         Queue bfsq = new LinkedList();
-        boolean hasAdjecentUnvisited;
         bfsq.add(bigboss);
         while(!bfsq.isEmpty()){
-            hasAdjecentUnvisited=false;
             current = (Enemy)bfsq.remove();
             if(bosses.getNumConnections(current)<2){
                 Enemy newsmolboss = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT);
                 //make small boss;
                 newenemies.add(newsmolboss);
                 bosses.addVertex(newsmolboss);
+                System.out.print(bosses.getNumConnections(current)+"\n");
                 bosses.addconnection(current, newsmolboss, 1);
                 if(bosses.getNumConnections(current)<2)
                     continue;

@@ -25,7 +25,7 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
     private int cyclebuffer = FRAME_PAUSE;
     private int currenttime = 0;
     private int defaultspawntime = 3000;
-    private boolean levelfinished = false;
+    private boolean levelfinished = true;
     
     private ArrayList<Enemy> enemytemplates = new ArrayList<>();
     private ArrayList<Integer> spawntimes = new ArrayList<>();
