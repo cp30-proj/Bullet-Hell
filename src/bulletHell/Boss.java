@@ -44,7 +44,7 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
     public void initBoss(){
         //initialize bigboss
         Bullet bullet = new Bullet();
-        Enemy enemy = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT/2);     
+        Enemy enemy = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT/3);     
         bullet = new Bullet();    
         bullet.setLocation(200, 20);
         bullet.setDirectionDegrees(270);
@@ -52,7 +52,7 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
         bullet.setImage("redbullet.png",30,30);
         enemy.addBulletSpawn(bullet, 150, 10, 100);    
         //tracker.addProjectile(bullet);      
-        enemy.setLocation(275,200);
+        enemy.setLocation(275,1);
         enemy.setVelocity(50, 10);
         enemy.setBehavior(0, true);
         enemy.setImage("boss.gif", 50,50);
@@ -87,10 +87,10 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
             current = (Enemy)bfsq.remove();
             if(bosses.getNumConnections(current)<2&&bigboss.getHealth()>0){
                 System.out.print("spawning smol boss\n");
-                Enemy newsmolboss = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+                Enemy newsmolboss = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT/2);
                 newsmolboss.setImage(bigboss.getImageFile(), bigboss.getXsize()/2, bigboss.getYsize()/2);
                 newsmolboss.setVelocity(bigboss.getXVelocity()*-1, bigboss.getYVelocity());
-                newsmolboss.setLocation(bigboss.getX(), bigboss.getY());
+                newsmolboss.setLocation(bigboss.getX(), bigboss.getY()+(bigboss.getXsize()*.75));
                 newsmolboss.setSpawns(bigboss.getSpawns());
                 newsmolboss.setBehavior(0, true);
                 newsmolboss.setHealth(bigboss.getHealth()/2);
