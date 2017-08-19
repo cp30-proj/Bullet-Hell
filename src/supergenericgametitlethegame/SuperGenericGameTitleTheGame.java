@@ -106,7 +106,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
                     }
                 }
                 if(isPlayerHit()){
-                    //Player.damagePlayer(1);
+                    Player.damagePlayer(1);
                 }
                 Health.setText("Health"+ (Player.getHealth()-(Player.getHealth()%1)) + "  \tScore: "+Player.getScore());
                 drawFrame(tracker.getBullets(), tracker.getEnemies());
