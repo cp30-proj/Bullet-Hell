@@ -132,7 +132,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
                 Player.damagePlayer();
             }
 
-            Health.setText("Health"+ Player.getHealth());
+            Health.setText("Health"+ (Player.getHealth()-(Player.getHealth()%1)));
         }
     }
     public void music() throws FileNotFoundException, IOException{
