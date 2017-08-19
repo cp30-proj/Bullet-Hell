@@ -193,7 +193,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         for(int i = 0;i!=10;i++){
             level.addEnemySpawn(laser(470,0,0,200,180), 30000+(i*200));
         }
-        level.addEnemySpawn(boss(235,200,0,200,180), 35000);
+        //level.addEnemySpawn(boss(235,200,0,200,180), 35000);
         
     }
     public Enemy spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){
@@ -300,22 +300,6 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         enemy.setVelocity(xvel, yvel);
         enemy.setImage("boomer.gif");
         enemy.setImageSize(30, 30);
-        return enemy;
-    }
-    public Enemy boss(int xloc, int yloc, int xvel, int yvel,int angle){   
-        Bullet bullet = new Bullet();
-        Enemy enemy = new Enemy(getWidth(), getHeight());     
-        bullet = new Bullet();    
-        bullet.setLocation(200, 200);
-        bullet.setDirectionDegrees(angle);
-        bullet.setVelocity(400);
-        bullet.setImage("redbullet.png",30,30);
-        enemy.addBulletSpawn(bullet, 150, 10, 100);    
-        //tracker.addProjectile(bullet);      
-        enemy.setLocation(xloc,yloc);
-        enemy.setVelocity(xvel, yvel);
-        enemy.setImage("boss.gif");
-        enemy.setImageSize(200, 200);
         return enemy;
     }
     
