@@ -43,6 +43,20 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
     public void Boss(){
         //initialize bigboss
         bosses.addVertex(bigboss);
+        Bullet bullet = new Bullet();
+        Enemy enemy = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT);     
+        bullet = new Bullet();    
+        bullet.setLocation(200, 200);
+        bullet.setDirectionDegrees(270);
+        bullet.setVelocity(400);
+        bullet.setImage("redbullet.png",30,30);
+        enemy.addBulletSpawn(bullet, 150, 10, 100);    
+        //tracker.addProjectile(bullet);      
+        enemy.setLocation(275,200);
+        enemy.setVelocity(0, 0);
+        enemy.setImage("boss.gif");
+        enemy.setImageSize(200, 200);
+        
     }
     
     public void addEnemySpawn(Enemy newenemy, int spawntime){

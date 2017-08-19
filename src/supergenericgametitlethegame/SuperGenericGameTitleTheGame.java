@@ -193,6 +193,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         for(int i = 0;i!=10;i++){
             level.addEnemySpawn(laser(470,0,0,200,180), 30000+(i*200));
         }
+        //level.addEnemySpawn(boss(235,200,0,200,180), 35000);
         
     }
     public Enemy spawnclockwisespinner(int xloc, int yloc, int xvel, int yvel){
