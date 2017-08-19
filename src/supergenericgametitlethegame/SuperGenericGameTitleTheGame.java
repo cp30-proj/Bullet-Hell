@@ -5,6 +5,7 @@
  */
 package supergenericgametitlethegame;
 import acm.graphics.GLabel;
+import acm.io.IODialog;
 import bulletHell.*;
 import acm.program.*;
 import javax.swing.JLabel;
@@ -23,6 +24,8 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
     private Level level = null;
     private Player Player = new Player();
    private JLabel Health = new JLabel("Health: "+ Player.getHealth());
+   IODialog dialog = getDialog();
+   private Boss boss = new Boss();
   
     int x = 0;
     int currentlevel = 1;
@@ -85,6 +88,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
+        dialog.println("Click on the screen once then\nPress E to fire");
         //placeholder();
         while(true){
             demo();
@@ -92,8 +96,13 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
                 tracker.updateObjects();
                 drawFrame(tracker.getBullets(), tracker.getEnemies());
                 pause(FRAME_PAUSE);
-                if(level!=null)
-                    tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
+                if(level!=null&&boss!=null){
+                    if(!level.isLevelFinished())
+                        tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
+                    else{
+                        tracker.addEnemy(boss.spawnEnemies(FRAME_PAUSE).iterator());
+                    }
+                }
                 if(isPlayerHit()){
                     Player.damagePlayer(1);
                 }

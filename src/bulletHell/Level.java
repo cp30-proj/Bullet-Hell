@@ -25,6 +25,7 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
     private int cyclebuffer = FRAME_PAUSE;
     private int currenttime = 0;
     private int defaultspawntime = 3000;
+    private boolean levelfinished = false;
     
     private ArrayList<Enemy> enemytemplates = new ArrayList<>();
     private ArrayList<Integer> spawntimes = new ArrayList<>();
@@ -34,6 +35,7 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
         enemytemplates.add(newenemy);
         spawntimes.add(spawntime);
         alreadyspawned.add(Boolean.FALSE);
+        updateCycleTime();
     }
     
     public ArrayList spawnEnemies(int time){
@@ -52,8 +54,27 @@ public class Level implements SuperGenericGameTitleTheGameConstants{
                 alreadyspawned.set(i, true);
             }
         }
-            
+        if(currenttime>cycle)
+            levelfinished=true;
         return newenemies;
+    }
+    
+    public boolean isLevelFinished(){
+        return levelfinished;
+    }
+    
+    public void setcyclebuffer(int buffer){
+        cyclebuffer = buffer;
+    }
+    
+    private void updateCycleTime(){
+        cycle=0;
+        for(int i=0; i<spawntimes.size(); i++){
+            if(spawntimes.get(i)>cycle){
+                cycle = spawntimes.get(i);
+            }
+        }
+        cycle += cyclebuffer;
     }
     
     public static void setbglevel(String filename){
