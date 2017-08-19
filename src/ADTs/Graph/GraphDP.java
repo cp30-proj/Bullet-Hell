@@ -46,6 +46,7 @@ public class GraphDP <E>{
     }
     
     public void removeVertex(E vertex){
+        if(vertices.contains(vertex)){
         int v = vertices.indexOf(vertex);
         for(int i=v; i<vertices.size(); i++){
             for(int j=0; j<vertices.size(); j++){
@@ -53,6 +54,7 @@ public class GraphDP <E>{
             }
         }
         vertices.remove(v);
+        }
     }
     
     public boolean hasedge(E tail, E head){
@@ -82,9 +84,6 @@ public class GraphDP <E>{
     
     public int getNumConnections(E vertex){
         int v = vertices.indexOf(vertex);
-        if(v==-1){
-            return 0;
-        }
         int numconnect=0;
         for(int j=0; j<vertices.size(); j++){
             if(edges[v][j]>0){

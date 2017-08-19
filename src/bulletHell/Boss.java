@@ -85,15 +85,20 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
         bfsq.add(bigboss);
         while(!bfsq.isEmpty()){
             current = (Enemy)bfsq.remove();
-            if(bosses.getNumConnections(current)<2&&bigboss.getHealth()>0){
+            if(current.getHealth()<=0){
+                cutBranch(current);
+                bosses.removeVertex(current);
+                continue;
+            }
+            else if(bosses.getNumConnections(current)<2&&bigboss.getHealth()>0){
                 System.out.print("spawning smol boss\n");
                 Enemy newsmolboss = new Enemy(APPLICATION_WIDTH, APPLICATION_HEIGHT/2);
-                newsmolboss.setImage(bigboss.getImageFile(), bigboss.getXsize()/2, bigboss.getYsize()/2);
-                newsmolboss.setVelocity(bigboss.getXVelocity()*-1, bigboss.getYVelocity());
-                newsmolboss.setLocation(bigboss.getX(), bigboss.getY()+(bigboss.getXsize()*.75));
-                newsmolboss.setSpawns(bigboss.getSpawns());
+                newsmolboss.setImage(current.getImageFile(), current.getXsize()/2, current.getYsize()/2);
+                newsmolboss.setVelocity(current.getXVelocity()*-1, current.getYVelocity());
+                newsmolboss.setLocation(current.getX(), current.getY()+(current.getXsize()*.75));
+                newsmolboss.setSpawns(current.getSpawns());
                 newsmolboss.setBehavior(0, true);
-                newsmolboss.setHealth(bigboss.getHealth()/2);
+                newsmolboss.setHealth(current.getHealth()/2);
                 newenemies.add(newsmolboss);
                 bosses.addVertex(newsmolboss);
                 //System.out.print(bosses.getNumConnections(current)+"\n");
@@ -106,10 +111,11 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
             if(!visited.contains(current)){
                 visited.add(current);
             }
-            for(Object element: bosses.getAdjecency(current)){
-                if(!visited.contains(element)){
-                    visited.add((Enemy)element);
-                    bfsq.add(element);
+            ArrayList adj = bosses.getAdjecency(current);
+            for(int i=0; i<adj.size(); i++){
+                if(!visited.contains(adj.get(i))){
+                    visited.add((Enemy)adj.get(i));
+                    bfsq.add(adj.get(i));
                 }
             }
         }
@@ -117,6 +123,31 @@ public class Boss implements SuperGenericGameTitleTheGameConstants{
         }
         }
         return newenemies;
+    }
+    
+    private void cutBranch(Enemy root){
+        ArrayList<Enemy> cutvisited = new ArrayList<>();
+        
+        Enemy current = root;
+        Queue bfsq = new LinkedList();
+        bfsq.add(root);
+        while(!bfsq.isEmpty()){
+            current = (Enemy)bfsq.remove();
+            if(!cutvisited.contains(current)){
+                cutvisited.add(current);
+            }
+            for(Object element: bosses.getAdjecency(current)){
+                if(!cutvisited.contains(element)){
+                    cutvisited.add((Enemy)element);
+                    bfsq.add(element);
+                }
+            }
+        }
+        
+        for(int i=cutvisited.size()-1; i>=0; i--){
+            bosses.removeVertex(cutvisited.get(i));
+            cutvisited.get(i).kill();
+        }
     }
     
     
