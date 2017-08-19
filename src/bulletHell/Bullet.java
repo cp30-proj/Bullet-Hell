@@ -12,6 +12,7 @@ import acm.graphics.GImage;
  * @author Paolo
  */
 public class Bullet {
+    Enemy shooter = null;
     GImage image = null;
     String imgfile = "";
     double xvelocity = 0;
@@ -23,6 +24,13 @@ public class Bullet {
     double sizex = 0;
     double sizey = 0;
     
+    public void setShooter(Enemy gun){
+        shooter = gun;
+    }
+    
+    public Enemy getShooter(){
+        return shooter;
+    }
     
     public void setVelocity(double new_velocity){
         double rads = (3.14/180)*direction;

@@ -308,15 +308,12 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         add(Player.pImage, Player.getXCoordinate(), Player.getYCoordinate() );
         while(!bullets.empty()){
             Bullet bullet = (Bullet)bullets.pop();
-            add(bullet.getImage(), bullet.getX(), bullet.getY());
+            add(bullet.getImage(), bullet.getX()-(bullet.getXsize()/2), bullet.getY()-(bullet.getYsize()/2));
         }
         while(!enemies.empty()){
             Enemy enemy = (Enemy)enemies.pop();
-            add(enemy.getImage(), enemy.getX(), enemy.getY());
+            add(enemy.getImage(), enemy.getX()-(enemy.getXsize()/2), enemy.getY()-(enemy.getYsize()/2));
         }
-
-
-        
     }
     
     public static void main(String[] args) {

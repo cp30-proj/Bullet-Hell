@@ -22,4 +22,8 @@ public interface SuperGenericGameTitleTheGameConstants {
     
     public static final double OFFSCREEN_BUFFER = 50;
     
+    public static final int DYING_ANIMATION_BUFFER = 2000;
+    
+    public static final String DEFAULT_DYING_ANIMATION_FILE = "";
+    
 }

@@ -8,14 +8,16 @@ import bulletHell.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 /**
  *
  * @author Paolo
  */
 public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
-    private final ArrayList<Bullet> bullets = new ArrayList<>();
+    private final LinkedList<Bullet> bullets = new LinkedList<>();
     private final LinkedList<Enemy> enemies = new LinkedList<>();
+    private final Queue<Enemy> deathrow = new LinkedList<>();
     private double xboundary = 0;
     private double yboundary = 0;
     private Level Level = new Level();
@@ -40,6 +42,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     
     public void updateObjects(){
         removeOffScreenObjects();
+        removeDeadEnemies();
         for(int i=0; i<bullets.size(); i++){
             bullets.get(i).updateLocation(FRAME_PAUSE);
             System.out.print("Bullet "+i+" location"+bullets.get(i).getX()+", "+bullets.get(i).getY()+"\n");
@@ -49,6 +52,9 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
             for(int j=0; j<addbullets.size(); j++){
                 System.out.print("bullets recieves\n");
                 bullets.add((Bullet)addbullets.get(j));
+            }
+            if(enemies.get(i).getHealth()<0){
+                deathrow.add(enemies.get(i));
             }
             enemies.get(i).updateLocation(FRAME_PAUSE);
         }
@@ -85,6 +91,15 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
             y = enemies.get(i).getY();
             if((x>(xboundary + OFFSCREEN_BUFFER)) || (x<(0-enemies.get(i).getXsize()-OFFSCREEN_BUFFER)) || (y>(yboundary + OFFSCREEN_BUFFER)) || (y<(0-enemies.get(i).getYsize()-OFFSCREEN_BUFFER))){
                 enemies.remove(i);
+            }
+        }
+    }
+    
+    public void removeDeadEnemies(){
+        if(!deathrow.isEmpty()){
+            while(deathrow.peek().getAnimationTime()<0){
+                enemies.remove(deathrow.peek());
+                deathrow.remove();
             }
         }
     }

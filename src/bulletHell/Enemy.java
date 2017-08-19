@@ -34,6 +34,9 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     private int currenttime = 0;
     private int defaultspawntime = 3000;
     
+    private int animationtimer = DYING_ANIMATION_BUFFER;
+    private String dyinganimation = DEFAULT_DYING_ANIMATION_FILE;
+    
     private ArrayList<Bullet> bullettemplates = new ArrayList<>();
     private ArrayList<Integer> spawntimes = new ArrayList<>();
     private ArrayList<Double> spawnpoints = new ArrayList<>(); //curcular points around the enemy where bullets will spawn
@@ -107,6 +110,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
             //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
             if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
                 bullet = new Bullet();
+                bullet.setShooter(this);
                 bullet.setImage(bullettemplates.get(i).getImageFile(), bullettemplates.get(i).getXsize(), bullettemplates.get(i).getYsize());
                 bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
                 bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()+(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
@@ -145,6 +149,10 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         cycle += cyclebuffer;
     }
     
+    public int getAnimationTime(){
+        return animationtimer;
+    }
+    
     public ArrayList getSpawns(){
         ArrayList spawns = new ArrayList();
         ArrayList temp = new ArrayList();
@@ -177,6 +185,13 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     
     public void damage(int damage){
         health-=damage;
+        if(health<0)
+            kill();
+    }
+    
+    public void kill(){
+        health=-1;
+        image = new GImage(dyinganimation, xsize, ysize);
     }
     
     public int getHealth(){
@@ -187,6 +202,9 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
         behaviorAction();
         xlocation+=(xvelocity*time/1000);
         ylocation+=(yvelocity*time/1000);
+        if(health<0){
+            animationtimer -= time;
+        }
     }
     
     public void setBehavior(int index, boolean active){
