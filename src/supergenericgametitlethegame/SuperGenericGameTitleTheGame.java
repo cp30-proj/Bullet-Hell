@@ -35,6 +35,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
      */
     
     public void init(){
+        addKeyListeners();
         addMouseListeners();
         add(Score, NORTH);
         add(Health, NORTH);
@@ -44,7 +45,11 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         } catch (IOException ex) {
             Logger.getLogger(SuperGenericGameTitleTheGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+        Bullet bullet = new Bullet();
+        bullet.setDirectionDegrees(90);
+        bullet.setVelocity(690);
+        bullet.setImage("bluebullet.png", 30,30);
+        Player.addBulletSpawn(bullet, 90, 10, 10);
     }
         public boolean isPlayerHit(){
             if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Level.bg){
@@ -63,10 +68,19 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             }
             return false;
    }
-                    public void mouseMoved(MouseEvent me){
+    public void mouseMoved(MouseEvent me){
                 Player.setXCoordinate(me.getX()-0.5*Player.pImage.getWidth());
                 Player.setYCoordinate(me.getY()-0.5*Player.pImage.getHeight());
             }
+    public void keyPressed(KeyEvent ke) {
+            switch (ke.getKeyCode()) {
+                case KeyEvent.VK_CONTROL:
+                    tracker.addProjectile(Player.getBullets(FRAME_PAUSE).iterator());
+                    break;
+                default:
+                    break;
+            }
+        }
     public void run(){
         tracker.setBounds(getWidth(), getHeight());
         demo();

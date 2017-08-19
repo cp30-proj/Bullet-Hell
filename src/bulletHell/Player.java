@@ -10,12 +10,14 @@ import acm.util.*;
 import acm.graphics.*;
 import acm.graphics.GImage;
 import java.awt.event.*;
-
+import java.util.ArrayList;
+import supergenericgametitlethegame.*;
+import static supergenericgametitlethegame.SuperGenericGameTitleTheGameConstants.FRAME_PAUSE;
 /**
  *
  * @author jiggy
  */
-public class Player extends GraphicsProgram {
+public class Player extends GraphicsProgram implements SuperGenericGameTitleTheGameConstants {
     
     double pHealth = 100;
     double xCoord = 100;
@@ -26,9 +28,19 @@ public class Player extends GraphicsProgram {
     double insertstartingXcoordinate=0;
     double insertstartingYcoordinate=0;
 
-
+        
+    private int cycle = 3000;
+    private int cyclebuffer = FRAME_PAUSE;
+    private int currenttime = 0;
+    private int defaultspawntime = 3000;
     
-    public GImage pImage = new GImage("player.gif",80,80);
+    private ArrayList<Bullet> bullettemplates = new ArrayList<>();
+    private ArrayList<Integer> spawntimes = new ArrayList<>();
+    private ArrayList<Double> spawnpoints = new ArrayList<>(); //curcular points around the enemy where bullets will spawn
+    private ArrayList<Double> spawndistance = new ArrayList<>();
+    private ArrayList<Boolean> alreadyspawned = new ArrayList<>();
+    
+    public GImage pImage = new GImage("fuck.png");
       
   
     double x=100;
@@ -65,6 +77,62 @@ public class Player extends GraphicsProgram {
           //if (isPlayerHit())
               pHealth--;
     }
+        private void updateCycleTime(){
+        cycle=0;
+        for(int i=0; i<spawntimes.size(); i++){
+            if(spawntimes.get(i)>cycle){
+                cycle = spawntimes.get(i);
+            }
+        }
+        cycle += cyclebuffer;
+    }
+    public void addBulletSpawn(String img, double newspawnpnt, double centerdistance, double speed, int spawntime){
+        Bullet newbullet = new Bullet();
+        newbullet.setImage(img);
+        newbullet.setDirectionDegrees(newspawnpnt);
+        newbullet.setVelocity(speed);
+        bullettemplates.add(newbullet);
+        spawntimes.add(spawntime);
+        spawnpoints.add(newspawnpnt);
+        spawndistance.add(centerdistance);
+        alreadyspawned.add(Boolean.FALSE);
+        updateCycleTime();
+    }
+    
+    public void addBulletSpawn(Bullet newbullet, double newspawnpnt, double centerdistance, int spawntime){
+        bullettemplates.add(newbullet);
+        spawntimes.add(spawntime);
+        spawnpoints.add(newspawnpnt);
+        spawndistance.add(centerdistance);
+        alreadyspawned.add(Boolean.FALSE);
+        updateCycleTime();
+    }
+        public ArrayList getBullets(int time){
+        //System.out.print(currenttime + "\n");
+        ArrayList<Bullet> newbullets = new ArrayList<>();
+        currenttime+=time;
+        Bullet bullet = null;
+        for(int i=0; i<spawntimes.size(); i++){
+            //System.out.print("bullet "+ i+ ": "+spawntimes.get(i)+"\n");
+            if(spawntimes.get(i)<currenttime && !alreadyspawned.get(i)){
+                bullet = new Bullet();
+                bullet.setImage(bullettemplates.get(i).getImageFile(), bullettemplates.get(i).getXsize(), bullettemplates.get(i).getYsize());
+                bullet.setVelocity(bullettemplates.get(i).getXVelocity(), bullettemplates.get(i).getYVelocity());
+                bullet.setLocation(getXCenter()+(spawndistance.get(i)*Math.cos(spawnpoints.get(i)*(3.14/180))), getYCenter()+(spawndistance.get(i)*Math.sin(spawnpoints.get(i)*(3.14/180))));
+                newbullets.add(bullet);
+                alreadyspawned.set(i, true);
+                //System.out.print("Making new bullet\n");
+            }
+        }
+        if(currenttime>cycle+cyclebuffer){
+            currenttime=0;
+            for(int i=0; i<alreadyspawned.size(); i++){
+                alreadyspawned.set(i, Boolean.FALSE);
+            }
+        }
+            
+        return newbullets;
+    }
     public double getHealth(){
         return pHealth;
     }
@@ -72,6 +140,13 @@ public class Player extends GraphicsProgram {
 
     public void attackPlayer(){
         
+    }
+        public double getXCenter(){
+        return xCoord+(pImage.getWidth()/2);
+    }
+    
+    public double getYCenter(){
+        return yCoord-(pImage.getHeight()/2);
     }
 
     public void setXCoordinate (double XCoor){
