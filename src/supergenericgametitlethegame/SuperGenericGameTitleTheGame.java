@@ -25,6 +25,7 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
     private Level level = null;
     private Player Player = new Player();
    private JLabel Health = new JLabel("Health: "+ Player.getHealth());
+  
     int x = 0;
     int currentlevel = 1;
     InputStream music;
@@ -51,19 +52,50 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
         bullet.setImage("bluebullet.png", 30,30);
         Player.addBulletSpawn(bullet, 90, 10, 10);
     }
+    
+    public void enemyCollisions(){
+        Stack<Enemy>stackofenemies = tracker.getEnemies();
+        for(int i=0; i<stackofenemies.size(); i++){
+            if(isEnemyHit(stackofenemies.peek())){
+                stackofenemies.peek().damage(1);
+                
+            }
+            stackofenemies.pop();
+        }
+    }
+    
+        public boolean isEnemyHit(Enemy eminem){
+            if( getElementAt(eminem.getX(),eminem.getY())!=null&&getElementAt(eminem.getX(),eminem.getY())!=Player.pImage&&getElementAt(eminem.getX(),eminem.getY())!=Level.bg){
+                
+                return true;
+            }
+            else if ( getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=null&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=Player.pImage&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY())!=Level.bg){
+                
+                return true;
+            }
+            else if ( getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!= null&&getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!=Player.pImage&&getElementAt(eminem.getX(),eminem.getY()+eminem.getYsize())!=Level.bg){
+                return true;
+            }
+            else if ( getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=null&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=Level.bg&&getElementAt(eminem.getX()+eminem.getXsize(),eminem.getY()+eminem.getYsize())!=Player.pImage){
+                return true;
+            }
+            return false;
+            
+            
+        }
         public boolean isPlayerHit(){
             if( getElementAt(Player.pImage.getX(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY())!=Level.bg){
                 
                 return true;
             }
-            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY())!=Level.bg){
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY())!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY())!=Player.pImage&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY())!=Level.bg){
                 
                 return true;
             }
-            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!= null&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight())!=Level.bg){
+            else if ( getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight()/4)!= null&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight()/4)!=Player.pImage&&getElementAt(Player.pImage.getX(),Player.pImage.getY()+Player.pImage.getHeight()/4)!=Level.bg){
                 return true;
             }
-            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=Level.bg&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth(),Player.pImage.getY()+Player.pImage.getHeight())!=Player.pImage){
+            else if ( getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY()+Player.pImage.getHeight()/4)!=null&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY()+Player.pImage.getHeight()/4)!=Level.bg&&getElementAt(Player.pImage.getX()+Player.pImage.getWidth()/4,Player.pImage.getY()+Player.pImage.getHeight()/4)!=Player.pImage){
                 return true;
             }
             return false;
@@ -92,9 +124,11 @@ public class SuperGenericGameTitleTheGame extends GraphicsProgram implements Sup
             pause(FRAME_PAUSE);
             if(level!=null)
             tracker.addEnemy(level.spawnEnemies(FRAME_PAUSE).iterator());
+            enemyCollisions();
             if(isPlayerHit()){
                 Player.damagePlayer();
             }
+
             Health.setText("Health"+ Player.getHealth());
         }
     }

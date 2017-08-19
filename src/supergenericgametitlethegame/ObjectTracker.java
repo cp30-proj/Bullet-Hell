@@ -97,7 +97,9 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     
     public void removeDeadEnemies(){
         if(!deathrow.isEmpty()){
-            while(deathrow.peek().getAnimationTime()<0){
+            while(!deathrow.isEmpty()){
+                if(deathrow.peek().getAnimationTime()<0)
+                    break;
                 enemies.remove(deathrow.peek());
                 deathrow.remove();
             }
