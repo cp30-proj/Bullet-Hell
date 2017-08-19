@@ -105,12 +105,15 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
     }
     
     public void removeDeadEnemies(){
+        Enemy temp;
         if(!deathrow.isEmpty()){
             while(!deathrow.isEmpty()){
-                if(deathrow.peek().getAnimationTime()<0)
+                if(deathrow.peek().getAnimationTime()<0){
+                    temp = deathrow.poll();
+                    enemies.remove(temp);
+                }
+                else
                     break;
-                enemies.remove(deathrow.peek());
-                deathrow.remove();
             }
         }
     }
@@ -124,6 +127,7 @@ public class ObjectTracker implements SuperGenericGameTitleTheGameConstants{
             collision = enemyrect.intersects(bulletrect) && bullets.get(i).isFromPlayer();
             if(collision){
                 System.out.print("Collison Detect Bullet: "+i+"\n");
+                bullets.remove(i);
                 break;
             }
         }

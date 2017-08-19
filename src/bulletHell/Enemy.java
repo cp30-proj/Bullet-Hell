@@ -35,7 +35,7 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     private int defaultspawntime = 3000;
     
     private int animationtimer = DYING_ANIMATION_BUFFER;
-    private String dyinganimation = DEFAULT_DYING_ANIMATION_FILE;
+    private String dyinganimation = "explosion.gif";
     
     private ArrayList<Bullet> bullettemplates = new ArrayList<>();
     private ArrayList<Integer> spawntimes = new ArrayList<>();
@@ -192,7 +192,12 @@ public class Enemy implements SuperGenericGameTitleTheGameConstants{
     public void kill(){
         clearSpawns();
         health=-1;
-        image.setImage(new GImage(dyinganimation, xsize, ysize));
+        image.setImage(new GImage(dyinganimation));
+        image.getImage().setSize(EXPLOSION_SIZE, EXPLOSION_SIZE);
+        xvelocity=0;
+        yvelocity=0;
+        xsize=EXPLOSION_SIZE;
+        ysize=EXPLOSION_SIZE;
     }
     
     public int getHealth(){

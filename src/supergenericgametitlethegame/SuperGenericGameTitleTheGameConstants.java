@@ -22,10 +22,12 @@ public interface SuperGenericGameTitleTheGameConstants {
     
     public static final double OFFSCREEN_BUFFER = 50;
     
-    public static final int DYING_ANIMATION_BUFFER = 2000;
+    public static final int DYING_ANIMATION_BUFFER = 500;
     
-    public static final String DEFAULT_DYING_ANIMATION_FILE = "";
+    public static final String DEFAULT_DYING_ANIMATION_FILE = "explosion.gif";
     
     public static final int PLAYER_DAMAGE = 1;
+    
+    public static final double EXPLOSION_SIZE = 100;
     
 }
